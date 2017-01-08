@@ -6,8 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:update": "npm test -- -u",
-    "test:watch": "npm test -- --watch",
-    "publish": "release-it"
+    "test:watch": "npm test -- --watch"
   },
   "bin": {
     "tplight": "tplight.js"
