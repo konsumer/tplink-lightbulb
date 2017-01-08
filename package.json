@@ -4,7 +4,9 @@
   "description": "Control TP-Link smart lightbulbs from nodejs",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:update": "npm test -- -u",
+    "test:watch": "npm test -- --watch"
   },
   "bin": {
     "tplight": "tplight.js"

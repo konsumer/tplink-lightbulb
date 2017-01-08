@@ -1,3 +1,4 @@
+const dgram = require('dgram')
 const EventEmitter = require('events')
 
 module.exports = class Bulb {
@@ -11,7 +12,18 @@ module.exports = class Bulb {
    */
   scan () {
     const emitter = new EventEmitter()
-    // TODO
+    const client = dgram.createSocket('udp4')
+    client.bind(9999, undefined, () => {
+      client.setBroadcast(true)
+      const msgBuf = this.encrypt(new Buffer('{"system":{"get_sysinfo":{}}}'))
+      client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
+    })
+    client.on('message', (msg, rinfo) => {
+      const light = new Bulb(rinfo.address)
+      light.info = Object.assign({}, JSON.parse(this.decrypt(msg).toString()).system.get_sysinfo, rinfo)
+      delete light.info.size
+      emitter.emit('light', light)
+    })
     return emitter
   }
 
@@ -25,7 +37,17 @@ module.exports = class Bulb {
       if (!this.ip) {
         return reject(new Error('IP not set.'))
       }
-      // TODO
+      const client = dgram.createSocket('udp4')
+      const message = this.encrypt(new Buffer(JSON.stringify(msg)))
+      client.send(message, 0, message.length, 9999, this.ip, (err, bytes) => {
+        if (err) {
+          return reject(err)
+        }
+        client.on('message', msg => {
+          resolve(JSON.parse(this.decrypt(msg).toString()))
+          client.close()
+        })
+      })
     })
   }
 
@@ -72,6 +94,24 @@ module.exports = class Bulb {
   details () {
     return this.send({'smartlife.iot.smartbulb.lightingservice': {'get_light_details': {}}})
       .then(r => r['smartlife.iot.smartbulb.lightingservice']['get_light_details'])
+  }
+
+  encrypt (buffer, key = 0xAB) {
+    for (let i = 0; i < buffer.length; i++) {
+      const c = buffer[i]
+      buffer[i] = c ^ key
+      key = buffer[i]
+    }
+    return buffer
+  }
+
+  decrypt (buffer, key = 0xAB) {
+    for (let i = 0; i < buffer.length; i++) {
+      const c = buffer[i]
+      buffer[i] = c ^ key
+      key = c
+    }
+    return buffer
   }
 }
 
