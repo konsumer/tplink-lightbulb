@@ -1,0 +1,25 @@
+{
+  "name": "tplink-lightbulb",
+  "version": "1.0.0",
+  "description": "Control TP-Link smart lightbulbs from nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "bin": {
+    "tplight": "tplight.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konsumer/tplink-lightbulb.git"
+  },
+  "author": "David Konsumer <konsumer@jetboystudio.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/konsumer/tplink-lightbulb/issues"
+  },
+  "homepage": "https://github.com/konsumer/tplink-lightbulb#readme",
+  "devDependencies": {
+    "jest": "^18.1.0"
+  }
+}
