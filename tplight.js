@@ -34,7 +34,7 @@ var argv = yargs
 
   .alias('color', 'c')
   .nargs('color', 1)
-  .describe('s', 'Color temperature (for on)')
+  .describe('c', 'Color temperature (for on)')
 
   .alias('brightness', 'b')
   .nargs('brightness', 1)
