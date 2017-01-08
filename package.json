@@ -23,5 +23,14 @@
   "homepage": "https://github.com/konsumer/tplink-lightbulb#readme",
   "devDependencies": {
     "jest": "^18.1.0"
+  },
+  "keywords": [
+    "tp-link",
+    "lightbulb",
+    "smartbulb",
+    "LB120"
+  ],
+  "dependencies": {
+    "yargs": "^6.6.0"
   }
 }

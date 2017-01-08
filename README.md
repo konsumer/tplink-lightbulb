@@ -1,6 +1,24 @@
 # tplink-lightbulb
 Control TP-Link smart lightbulbs from nodejs
 
+## cli
+
+You can install it for your system with this:
+
+```
+npm i -g tplink-lightbulb
+```
+
+Now, you can use it like this:
+
+```
+tplight on 10.0.0.200
+```
+
+For full documentation, run `tplight` with no parameters.
+
+## library
+
 You can install it in your project like this:
 
 ```
@@ -27,12 +45,13 @@ You can also scan for lights on your network
 const Bulb = require('tplink-lightbulb')
 const lights = new Bulb()
 
-// turn all discovered lights off
-lights.scan()
+// turn first discovered light off
+const scan = lights.scan()
   .on('light', light => {
     light.set(false)
       .then(status => {
         console.log(status)
+        scan.stop()
       })
   })
 ```

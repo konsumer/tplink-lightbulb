@@ -13,7 +13,7 @@ module.exports = class Bulb {
   scan () {
     const emitter = new EventEmitter()
     const client = dgram.createSocket('udp4')
-    client.bind(9999, undefined, () => {
+    client.bind(9998, undefined, () => {
       client.setBroadcast(true)
       const msgBuf = this.encrypt(new Buffer('{"system":{"get_sysinfo":{}}}'))
       client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
@@ -24,6 +24,7 @@ module.exports = class Bulb {
       delete light.info.size
       emitter.emit('light', light)
     })
+    emitter.stop = () => client.close()
     return emitter
   }
 
