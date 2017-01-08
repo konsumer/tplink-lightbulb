@@ -17,6 +17,7 @@ var argv = yargs
 
   .example('$0 scan', 'Get list of lightbulbs on your network')
   .example('$0 on 10.0.0.200', 'Turn on a light')
+  .example('$0 off 10.0.0.200', 'Turn off a light')
 
   .alias('transition', 't')
   .nargs('transition', 1)
@@ -43,7 +44,7 @@ var argv = yargs
 
 const command = argv._.shift()
 
-if ((!argv._.length || argv._.length < 2) && command !== 'scan') {
+if ((!argv._.length || argv._.length < 1) && command !== 'scan') {
   console.log('COMMAND and IP_ADDRESS are required')
   yargs.showHelp()
   process.exit(1)
