@@ -38,6 +38,10 @@ var argv = yargs
   .nargs('brightness', 1)
   .describe('b', 'Brightness of light (for on)')
 
+  .nargs('timeout', 1)
+  .describe('timeout', 'Timeout for scan (in seconds)')
+  .default('timeout', 0)
+
   .argv
 
 const command = argv._.shift()
@@ -88,9 +92,15 @@ switch (command) {
       .then(r => console.log(r))
     break
   case 'scan':
-    console.log('Press Ctrl-C to stop')
     const lights = new Bulb()
-    lights.scan()
+    if (argv.timeout) {
+      setTimeout(() => {
+        scan.stop()
+      }, argv.timeout * 1000)
+    } else {
+      console.log('Press Ctrl-C to stop')
+    }
+    const scan = lights.scan()
       .on('light', light => {
         console.log(light.info.address, '-', light.info.alias)
       })
