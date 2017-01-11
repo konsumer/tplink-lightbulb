@@ -1,4 +1,4 @@
-<img src="http://static.tp-link.com/LB120%EF%BC%88US%EF%BC%891.0-01_1473153034772w.jpg" align=right" alt="tested with LB120" />
+<img src="http://s7d1.scene7.com/is/image/officedepot/945143_p_lb120_white_3?$OD-Dynamic$&wid=200&hei=200" align=right" alt="tested with LB120" />
 
 # tplink-lightbulb
 Control TP-Link smart lightbulbs from nodejs
