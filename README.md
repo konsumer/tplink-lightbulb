@@ -232,7 +232,7 @@ Badly decrypt message from format bulbs use
 
 **Example**  
 ```js
-const decrypted = Bulb.decrypt(Buffer.from('super secret text'))
+const decrypted = Bulb.decrypt(encrypted)
 ```
 
 
