@@ -149,7 +149,7 @@ Change state of lightbulb
 | --- | --- | --- |
 | power | <code>Boolean</code> | On or off |
 | transition | <code>Number</code> | Transition to new state in this time |
-| options | <code>Object</code> | object containing mode,hue,saturation,color_temp,brightness |
+| options | <code>Object</code> | object containing `mode`, `hue`, `saturation`, `color_temp`, `brightness` |
 
 **Example**  
 ```js
@@ -255,7 +255,6 @@ Badly decrypt message from format bulbs use
 ```js
 const decrypted = Bulb.decrypt(encrypted)
 ```
-
 
 ## wireshark
 

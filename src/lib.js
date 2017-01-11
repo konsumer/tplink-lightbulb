@@ -85,7 +85,7 @@ light.send({
    * @module set
    * @param {Boolean} power     On or off
    * @param {Number}  transition Transition to new state in this time
-   * @param {Object}  options    object containing mode,hue,saturation,color_temp,brightness
+   * @param {Object}  options    object containing `mode`, `hue`, `saturation`, `color_temp`, `brightness`
    * @example
    * ```js
 // turn a light on
