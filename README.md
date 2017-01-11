@@ -18,10 +18,31 @@ npm i -g tplink-lightbulb
 Now, you can use it like this:
 
 ```
-tplight on 10.0.0.200
-```
+Usage: tplight <COMMAND> <IP_ADDRESS> [options] [<JSON>]
 
-For full documentation, run `tplight` with no parameters.
+Commands:
+  scan     Scan for lightbulbs
+  on       Turn on lightbulb
+  off      Turn off lightbulb
+  cloud    Get cloud info
+  raw      Send a raw JSON command
+  details  Get details about the device
+
+Options:
+  -?, --help        Show help                                          [boolean]
+  --timeout         Timeout for scan (in seconds)                   [default: 0]
+  --transition, -t  Transition time (for on/off)                    [default: 0]
+  --hue, -h         Hue of lightbulb (for on)
+  --saturation, -s  Saturation of color (for on)
+  --color, -c       Color temperature (for on)
+  --brightness, -b  Brightness of light (for on)
+
+Examples:
+  tplight scan --timeout=1  Get list of lightbulbs on your network, stop
+                                 after 1 second
+  tplight on 10.0.0.200     Turn on a light
+  tplight off 10.0.0.200    Turn off a light
+```
 
 ## library
 
