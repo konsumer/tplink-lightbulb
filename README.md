@@ -73,7 +73,7 @@ import Bulb from 'tplink-lightbulb'
 <dt><a href="#module_send">send</a> ⇒ <code>Promise</code></dt>
 <dd><p>Send a message to a lightbulb (for RAW JS message objects)</p>
 </dd>
-<dt><a href="#module_set">set</a></dt>
+<dt><a href="#module_set">set</a> ⇒ <code>Promise</code></dt>
 <dd><p>Change state of lightbulb</p>
 </dd>
 <dt><a href="#module_daystat">daystat</a> ⇒ <code>Promise</code></dt>
@@ -101,7 +101,7 @@ import Bulb from 'tplink-lightbulb'
 ### scan ⇒ <code>EventEmitter</code>
 Scan for lightbulbs on your network
 
-**Returns**: <code>EventEmitter</code> - emit `light` events when lightbulbs are found  
+**Returns**: <code>EventEmitter</code> - Emit `light` events when lightbulbs are found  
 **Example**  
 ```js
 // turn first discovered light off
@@ -141,15 +141,16 @@ light.send({
 ```
 <a name="module_set"></a>
 
-### set
+### set ⇒ <code>Promise</code>
 Change state of lightbulb
 
+**Returns**: <code>Promise</code> - Resolves to output of command  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | power | <code>Boolean</code> | On or off |
 | transition | <code>Number</code> | Transition to new state in this time |
-| options | <code>Object</code> | object containing `mode`, `hue`, `saturation`, `color_temp`, `brightness` |
+| options | <code>Object</code> | Object containing `mode`, `hue`, `saturation`, `color_temp`, `brightness` |
 
 **Example**  
 ```js

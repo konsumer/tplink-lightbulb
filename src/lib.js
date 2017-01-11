@@ -9,7 +9,7 @@ module.exports = class Bulb {
   /**
    * Scan for lightbulbs on your network
    * @module scan
-   * @return {EventEmitter} emit `light` events when lightbulbs are found
+   * @return {EventEmitter} Emit `light` events when lightbulbs are found
    * @example
 ```js
 // turn first discovered light off
@@ -85,7 +85,8 @@ light.send({
    * @module set
    * @param {Boolean} power     On or off
    * @param {Number}  transition Transition to new state in this time
-   * @param {Object}  options    object containing `mode`, `hue`, `saturation`, `color_temp`, `brightness`
+   * @param {Object}  options    Object containing `mode`, `hue`, `saturation`, `color_temp`, `brightness`
+   * @returns {Promise}          Resolves to output of command
    * @example
    * ```js
 // turn a light on
