@@ -1,6 +1,6 @@
 {
   "name": "tplink-lightbulb",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Control TP-Link smart lightbulbs from nodejs",
   "main": "build/lib.js",
   "scripts": {
