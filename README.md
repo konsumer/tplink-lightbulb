@@ -58,13 +58,13 @@ const scan = lights.scan()
 
 ## wireshark
 
-If you want to analyze the protocol, you can use the included `tplink-smarthome.lue`.
+If you want to analyze the protocol, you can use the included `tplink-smarthome.lua`.
 
 Install in the location listed in About Wireshark/Folders/Personal Plugins
 
 I captured packets with tcpdump running on a [raspberry pi pretending to be a router](https://learn.adafruit.com/setting-up-a-raspberry-pi-as-a-wifi-access-point?view=all). In general, this is a really useful way to capture IOT protocols and mess around with them.
 
-I ssh'd into my pie, ran `sudo aptupdate && sudo apt install tcpdump`, then `tcpdump -i wlan0 -w lights.pcap`
+I ssh'd into my pi, ran `sudo aptupdate && sudo apt install tcpdump`, then `tcpdump -i wlan0 -w lights.pcap`
 
 I connected the lights to that network (reset them to factory default by turning the power off/on 5 times, then configure in Kasa app.)
 

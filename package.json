@@ -33,6 +33,13 @@
     "LB120"
   ],
   "dependencies": {
+    "babel-preset-latest": "^6.16.0",
+    "babel-register": "^6.18.0",
     "yargs": "^6.6.0"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
   }
 }
