@@ -2,15 +2,16 @@
   "name": "tplink-lightbulb",
   "version": "1.0.5",
   "description": "Control TP-Link smart lightbulbs from nodejs",
-  "main": "index.js",
+  "main": "build/lib.js",
   "scripts": {
     "test": "jest",
     "test:update": "npm test -- -u",
     "test:watch": "npm test -- --watch",
-    "release": "release-it"
+    "release": "npm run build && release-it",
+    "build": "babel src/lib.js > build/lib.js && babel src/cli.js > build/cli.js"
   },
   "bin": {
-    "tplight": "tplight.js"
+    "tplight": "build/cli.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
   },
   "homepage": "https://github.com/konsumer/tplink-lightbulb#readme",
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
     "jest": "^18.1.0",
     "release-it": "^2.5.3"
   },
@@ -33,8 +36,6 @@
     "LB120"
   ],
   "dependencies": {
-    "babel-preset-latest": "^6.16.0",
-    "babel-register": "^6.18.0",
     "yargs": "^6.6.0"
   },
   "babel": {
