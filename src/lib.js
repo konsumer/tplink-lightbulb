@@ -218,7 +218,7 @@ const encrypted = Bulb.encrypt(Buffer.from('super secret text'))
    * @return {Buffer}        Decrypted data
    *  @example
 ```js
-const decrypted = Bulb.decrypt(Buffer.from('super secret text'))
+const decrypted = Bulb.decrypt(encrypted)
 ```
    */
   decrypt (buffer, key = 0xAB) {
