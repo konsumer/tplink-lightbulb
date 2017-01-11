@@ -13,7 +13,7 @@ var argv = yargs
   .command('raw', 'Send a raw JSON command')
   .command('details', 'Get details about the device')
 
-  .example('$0 scan', 'Get list of lightbulbs on your network')
+  .example('$0 scan --timeout=1', 'Get list of lightbulbs on your network, stop after 1 second')
   .example('$0 on 10.0.0.200', 'Turn on a light')
   .example('$0 off 10.0.0.200', 'Turn off a light')
 
