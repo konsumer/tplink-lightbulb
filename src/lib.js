@@ -74,6 +74,12 @@ module.exports = class Bulb {
       .then(r => r['smartlife.iot.smartbulb.lightingservice']['transition_light_state'])
   }
 
+  /**
+   * Get schedule info
+   * @param  {Number} month Month to check: 1-12
+   * @param  {Number} year  Full year to check: ie 2017
+   * @return {Promise}      Resolves to schedule info
+   */
   daystat (month, year) {
     const now = new Date()
     month = month || now.getMonth() + 1
@@ -82,21 +88,39 @@ module.exports = class Bulb {
       .then(r => r['smartlife.iot.common.schedule']['get_daystat'])
   }
 
+  /**
+   * Get cloud info from bulb
+   * @return {Promise} Resolves to cloud info
+   */
   cloud () {
     return this.send({'smartlife.iot.common.cloud': {'get_info': {}}})
       .then(r => r['smartlife.iot.common.cloud']['get_info'])
   }
 
+  /**
+   * Get schedule from bulb
+   * @return {Promise} Resolves to schedule info
+   */
   schedule () {
     return this.send({'smartlife.iot.common.schedule': {'get_rules': {}}})
       .then(r => r['smartlife.iot.common.schedule']['get_rules'])
   }
 
+  /**
+   * Get operational details from bulb
+   * @return {Promise} Resolves to operational details
+   */
   details () {
     return this.send({'smartlife.iot.smartbulb.lightingservice': {'get_light_details': {}}})
       .then(r => r['smartlife.iot.smartbulb.lightingservice']['get_light_details'])
   }
 
+  /**
+   * Lamely encrypt message in format bulbs use
+   * @param  {Buffer} buffer Buffer of data to encrypt
+   * @param  {Number} key    Encryption key (default is generally correct)
+   * @return {Buffer}        Encrypted data
+   */
   encrypt (buffer, key = 0xAB) {
     for (let i = 0; i < buffer.length; i++) {
       const c = buffer[i]
@@ -106,6 +130,12 @@ module.exports = class Bulb {
     return buffer
   }
 
+  /**
+   * Lamely decrypt message from format bulbs use
+   * @param  {Buffer} buffer Buffer of data to decrypt
+   * @param  {Number} key    Encryption key (default is generally correct)
+   * @return {Buffer}        Decrypted data
+   */
   decrypt (buffer, key = 0xAB) {
     for (let i = 0; i < buffer.length; i++) {
       const c = buffer[i]
