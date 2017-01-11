@@ -3,7 +3,7 @@
 # tplink-lightbulb
 Control TP-Link smart lightbulbs from nodejs
 
-![published on NPM](https://img.shields.io/npm/v/npm.svg)
+[![NPM](https://nodei.co/npm/tplink-lightbulb.png?compact=true)](https://nodei.co/npm/tplink-lightbulb/)
 
 This will allow you to control TP-Link smart lightbulbs from nodejs or the command-line. I have only tested with [LB120](http://www.tp-link.com/us/products/details/cat-5609_LB120.html) bulbs, and am eager to add support for more, so send a PR, or even just a pcap file of network traffic to add support for your lightbulb.
 
