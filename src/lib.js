@@ -23,7 +23,7 @@ const scan = Bulb.scan()
   })
 ```
    */
-  scan () {
+  static scan () {
     const emitter = new EventEmitter()
     const client = dgram.createSocket('udp4')
     client.bind(9998, undefined, () => {
@@ -202,7 +202,7 @@ light.details()
 const encrypted = Bulb.encrypt(Buffer.from('super secret text'))
 ```
    */
-  encrypt (buffer, key = 0xAB) {
+  static encrypt (buffer, key = 0xAB) {
     for (let i = 0; i < buffer.length; i++) {
       const c = buffer[i]
       buffer[i] = c ^ key
@@ -222,7 +222,7 @@ const encrypted = Bulb.encrypt(Buffer.from('super secret text'))
 const decrypted = Bulb.decrypt(encrypted)
 ```
    */
-  decrypt (buffer, key = 0xAB) {
+  static decrypt (buffer, key = 0xAB) {
     for (let i = 0; i < buffer.length; i++) {
       const c = buffer[i]
       buffer[i] = c ^ key
