@@ -23,22 +23,28 @@ const scan = Bulb.scan()
   })
 ```
    */
-  static scan () {
+  static scan (ip) {
     const emitter = new EventEmitter()
     const client = dgram.createSocket('udp4')
     client.bind(9998, undefined, () => {
       client.setBroadcast(true)
       const msgBuf = Bulb.encrypt(new Buffer('{"system":{"get_sysinfo":{}}}'))
-      client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
+      client.send(msgBuf, 0, msgBuf.length, 9999, ip || '255.255.255.255')
     })
     client.on('message', (msg, rinfo) => {
-      const light = new Bulb(rinfo.address)
-      light.info = Object.assign({}, JSON.parse(Bulb.decrypt(msg).toString()).system.get_sysinfo, rinfo)
-      delete light.info.size
-      emitter.emit('light', light)
+      emitter.emit('light', new Bulb(rinfo.address))
     })
     emitter.stop = () => client.close()
     return emitter
+  }
+
+  /**
+   * Get info about the Bulb
+   * @return {Promise} Resolves to info
+   */
+  info () {
+    return this.send({system: {get_sysinfo: {}}})
+      .then(info => info.system.get_sysinfo)
   }
 
   /**
@@ -211,6 +217,10 @@ const encrypted = Bulb.encrypt(Buffer.from('super secret text'))
     return buffer
   }
 
+  encrypt (buffer, key) {
+    return Bulb.encrypt(buffer, key)
+  }
+
   /**
    * Badly decrypt message from format bulbs use
    * @module decrypt
@@ -229,6 +239,10 @@ const decrypted = Bulb.decrypt(encrypted)
       key = c
     }
     return buffer
+  }
+
+  decrypt (buffer, key) {
+    return Bulb.decrypt(buffer, key)
   }
 }
 
