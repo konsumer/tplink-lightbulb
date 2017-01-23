@@ -139,7 +139,8 @@ Get info about the Bulb
 **Returns**: <code>Promise</code> - Resolves to info  
 **Example**  
 ```js
-// turn first discovered light off
+// get info about a light
+const light = new Bulb('10.0.0.200')
 light.info()
   .then(info => {
     console.log(info)
@@ -158,6 +159,7 @@ Send a message to a lightbulb (for RAW JS message objects)
 
 **Example**  
 ```js
+const light = new Bulb('10.0.0.200')
 light.send({
   'smartlife.iot.smartbulb.lightingservice': {
     'transition_light_state': {
@@ -207,6 +209,8 @@ Get schedule info
 
 **Example**  
 ```js
+// get the light's schedule for 1/2017
+const light = new Bulb('10.0.0.200')
 light.schedule(1, 2017)
   .then(schedule => {
     console.log(schedule)
@@ -221,6 +225,8 @@ Get cloud info from bulb
 **Returns**: <code>Promise</code> - Resolves to cloud info  
 **Example**  
 ```js
+// get the cloud info for the light
+const light = new Bulb('10.0.0.200')
 light.cloud()
   .then(info => {
     console.log(info)
@@ -235,6 +241,8 @@ Get schedule from bulb
 **Returns**: <code>Promise</code> - Resolves to schedule info  
 **Example**  
 ```js
+// get the bulb's schedule
+const light = new Bulb('10.0.0.200')
 light.schedule()
   .then(schedule => {
     console.log(schedule)
@@ -249,6 +257,8 @@ Get operational details from bulb
 **Returns**: <code>Promise</code> - Resolves to operational details  
 **Example**  
 ```js
+// get some extra details about the light
+const light = new Bulb('10.0.0.200')
 light.details()
   .then(details => {
     console.log(details)
@@ -287,7 +297,6 @@ Badly decrypt message from format bulbs use
 ```js
 const decrypted = Bulb.decrypt(encrypted)
 ```
-
 
 ## thanks
 

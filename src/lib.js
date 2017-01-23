@@ -44,7 +44,8 @@ const scan = Bulb.scan()
    * @return {Promise} Resolves to info
    * @example
 ```js
-// turn first discovered light off
+// get info about a light
+const light = new Bulb('10.0.0.200')
 light.info()
   .then(info => {
     console.log(info)
@@ -63,6 +64,7 @@ light.info()
    * @return {Promise}    Resolves with answer
    * @example
 ```js
+const light = new Bulb('10.0.0.200')
 light.send({
   'smartlife.iot.smartbulb.lightingservice': {
     'transition_light_state': {
@@ -137,6 +139,8 @@ light.set(true)
    * @return {Promise}      Resolves to schedule info
    * @example
 ```js
+// get the light's schedule for 1/2017
+const light = new Bulb('10.0.0.200')
 light.schedule(1, 2017)
   .then(schedule => {
     console.log(schedule)
@@ -158,6 +162,8 @@ light.schedule(1, 2017)
    * @return {Promise} Resolves to cloud info
    * @example
 ```js
+// get the cloud info for the light
+const light = new Bulb('10.0.0.200')
 light.cloud()
   .then(info => {
     console.log(info)
@@ -176,6 +182,8 @@ light.cloud()
    * @return {Promise} Resolves to schedule info
    * @example
 ```js
+// get the bulb's schedule
+const light = new Bulb('10.0.0.200')
 light.schedule()
   .then(schedule => {
     console.log(schedule)
@@ -194,6 +202,8 @@ light.schedule()
    * @return {Promise} Resolves to operational details
    * @example
 ```js
+// get some extra details about the light
+const light = new Bulb('10.0.0.200')
 light.details()
   .then(details => {
     console.log(details)
