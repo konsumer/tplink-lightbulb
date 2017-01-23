@@ -42,7 +42,7 @@ const scan = Bulb.scan()
    * Get info about the Bulb
    * @module info
    * @return {Promise} Resolves to info
-   * * @example
+   * @example
 ```js
 // turn first discovered light off
 light.info()

@@ -136,15 +136,15 @@ const scan = Bulb.scan()
 ## info ⇒ <code>Promise</code>
 Get info about the Bulb
 
-**Returns**: <code>Promise</code> - Resolves to info
-* @example
+**Returns**: <code>Promise</code> - Resolves to info  
+**Example**  
 ```js
 // turn first discovered light off
 light.info()
   .then(info => {
     console.log(info)
   })
-```  
+```
 <a name="module_send"></a>
 
 ## send ⇒ <code>Promise</code>
@@ -287,6 +287,7 @@ Badly decrypt message from format bulbs use
 ```js
 const decrypted = Bulb.decrypt(encrypted)
 ```
+
 
 ## thanks
 
