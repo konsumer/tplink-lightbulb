@@ -96,7 +96,7 @@ switch (command) {
   case 'scan':
     const scan = Bulb.scan()
       .on('light', light => {
-        console.log(light.info.address, '-', light.info.alias)
+        console.log(light._info.address, '-', light._info.alias)
       })
     if (argv.timeout) {
       setTimeout(() => {

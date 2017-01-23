@@ -32,7 +32,9 @@ const scan = Bulb.scan()
       client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
     })
     client.on('message', (msg, rinfo) => {
-      emitter.emit('light', new Bulb(rinfo.address))
+      const light = new Bulb(rinfo.address)
+      light._info = rinfo
+      emitter.emit('light', light)
     })
     emitter.stop = () => client.close()
     return emitter
