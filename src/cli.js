@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import Bulb from './lib'
 import yargs from 'yargs'
 
@@ -100,7 +102,7 @@ switch (command) {
     } else {
       console.log('Press Ctrl-C to stop')
     }
-    const scan = lights.scan()
+    const scan = Bulb.scan()
       .on('light', light => {
         console.log(light.info.address, '-', light.info.alias)
       })
