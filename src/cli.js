@@ -94,7 +94,10 @@ switch (command) {
       .then(r => console.log(r))
     break
   case 'scan':
-    const lights = new Bulb()
+    const scan = Bulb.scan()
+      .on('light', light => {
+        console.log(light.info.address, '-', light.info.alias)
+      })
     if (argv.timeout) {
       setTimeout(() => {
         scan.stop()
@@ -102,10 +105,6 @@ switch (command) {
     } else {
       console.log('Press Ctrl-C to stop')
     }
-    const scan = Bulb.scan()
-      .on('light', light => {
-        console.log(light.info.address, '-', light.info.alias)
-      })
     break
   default:
     console.log('Unknown command.')
