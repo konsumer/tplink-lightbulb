@@ -64,11 +64,28 @@ or for ES6:
 import Bulb from 'tplink-lightbulb'
 ```
 
+## wireshark
+
+If you want to analyze the protocol, you can use the included `tplink-smarthome.lua`.
+
+Install in the location listed in About Wireshark/Folders/Personal Plugins
+
+I captured packets with tcpdump running on a [raspberry pi pretending to be a router](https://learn.adafruit.com/setting-up-a-raspberry-pi-as-a-wifi-access-point?view=all). In general, this is a really useful way to capture IOT protocols and mess around with them.
+
+I ssh'd into my pi, ran `sudo apt update && sudo apt install tcpdump`, then `tcpdump -i wlan0 -w lights.pcap`
+
+I connected the lights to that network (reset them to factory default by turning the power off/on 5 times, then configure in Kasa app.)
+
+After I did stuff like switch the lights on/off in app, I open the pcap file in wireshark on my desktop.
+
 ## API
 
 <dl>
 <dt><a href="#module_scan">scan</a> ⇒ <code>EventEmitter</code></dt>
 <dd><p>Scan for lightbulbs on your network</p>
+</dd>
+<dt><a href="#module_info">info</a> ⇒ <code>Promise</code></dt>
+<dd><p>Get info about the Bulb</p>
 </dd>
 <dt><a href="#module_send">send</a> ⇒ <code>Promise</code></dt>
 <dd><p>Send a message to a lightbulb (for RAW JS message objects)</p>
@@ -98,7 +115,7 @@ import Bulb from 'tplink-lightbulb'
 
 <a name="module_scan"></a>
 
-### scan ⇒ <code>EventEmitter</code>
+## scan ⇒ <code>EventEmitter</code>
 Scan for lightbulbs on your network
 
 **Returns**: <code>EventEmitter</code> - Emit `light` events when lightbulbs are found  
@@ -114,9 +131,23 @@ const scan = Bulb.scan()
       })
   })
 ```
+<a name="module_info"></a>
+
+## info ⇒ <code>Promise</code>
+Get info about the Bulb
+
+**Returns**: <code>Promise</code> - Resolves to info
+* @example
+```js
+// turn first discovered light off
+light.info()
+  .then(info => {
+    console.log(info)
+  })
+```  
 <a name="module_send"></a>
 
-### send ⇒ <code>Promise</code>
+## send ⇒ <code>Promise</code>
 Send a message to a lightbulb (for RAW JS message objects)
 
 **Returns**: <code>Promise</code> - Resolves with answer  
@@ -141,7 +172,7 @@ light.send({
 ```
 <a name="module_set"></a>
 
-### set ⇒ <code>Promise</code>
+## set ⇒ <code>Promise</code>
 Change state of lightbulb
 
 **Returns**: <code>Promise</code> - Resolves to output of command  
@@ -164,7 +195,7 @@ light.set(true)
 ```
 <a name="module_daystat"></a>
 
-### daystat ⇒ <code>Promise</code>
+## daystat ⇒ <code>Promise</code>
 Get schedule info
 
 **Returns**: <code>Promise</code> - Resolves to schedule info  
@@ -184,7 +215,7 @@ light.schedule(1, 2017)
 ```
 <a name="module_cloud"></a>
 
-### cloud ⇒ <code>Promise</code>
+## cloud ⇒ <code>Promise</code>
 Get cloud info from bulb
 
 **Returns**: <code>Promise</code> - Resolves to cloud info  
@@ -198,7 +229,7 @@ light.cloud()
 ```
 <a name="module_schedule"></a>
 
-### schedule ⇒ <code>Promise</code>
+## schedule ⇒ <code>Promise</code>
 Get schedule from bulb
 
 **Returns**: <code>Promise</code> - Resolves to schedule info  
@@ -212,7 +243,7 @@ light.schedule()
 ```
 <a name="module_details"></a>
 
-### details ⇒ <code>Promise</code>
+## details ⇒ <code>Promise</code>
 Get operational details from bulb
 
 **Returns**: <code>Promise</code> - Resolves to operational details  
@@ -226,7 +257,7 @@ light.details()
 ```
 <a name="module_encrypt"></a>
 
-### encrypt ⇒ <code>Buffer</code>
+## encrypt ⇒ <code>Buffer</code>
 Badly encrypt message in format bulbs use
 
 **Returns**: <code>Buffer</code> - Encrypted data  
@@ -242,7 +273,7 @@ const encrypted = Bulb.encrypt(Buffer.from('super secret text'))
 ```
 <a name="module_decrypt"></a>
 
-### decrypt ⇒ <code>Buffer</code>
+## decrypt ⇒ <code>Buffer</code>
 Badly decrypt message from format bulbs use
 
 **Returns**: <code>Buffer</code> - Decrypted data  
@@ -256,20 +287,6 @@ Badly decrypt message from format bulbs use
 ```js
 const decrypted = Bulb.decrypt(encrypted)
 ```
-
-## wireshark
-
-If you want to analyze the protocol, you can use the included `tplink-smarthome.lua`.
-
-Install in the location listed in About Wireshark/Folders/Personal Plugins
-
-I captured packets with tcpdump running on a [raspberry pi pretending to be a router](https://learn.adafruit.com/setting-up-a-raspberry-pi-as-a-wifi-access-point?view=all). In general, this is a really useful way to capture IOT protocols and mess around with them.
-
-I ssh'd into my pi, ran `sudo apt update && sudo apt install tcpdump`, then `tcpdump -i wlan0 -w lights.pcap`
-
-I connected the lights to that network (reset them to factory default by turning the power off/on 5 times, then configure in Kasa app.)
-
-After I did stuff like switch the lights on/off in app, I open the pcap file in wireshark on my desktop.
 
 ## thanks
 

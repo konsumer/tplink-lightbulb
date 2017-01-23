@@ -23,13 +23,13 @@ const scan = Bulb.scan()
   })
 ```
    */
-  static scan (ip) {
+  static scan () {
     const emitter = new EventEmitter()
     const client = dgram.createSocket('udp4')
     client.bind(9998, undefined, () => {
       client.setBroadcast(true)
       const msgBuf = Bulb.encrypt(new Buffer('{"system":{"get_sysinfo":{}}}'))
-      client.send(msgBuf, 0, msgBuf.length, 9999, ip || '255.255.255.255')
+      client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
     })
     client.on('message', (msg, rinfo) => {
       emitter.emit('light', new Bulb(rinfo.address))
@@ -40,7 +40,16 @@ const scan = Bulb.scan()
 
   /**
    * Get info about the Bulb
+   * @module info
    * @return {Promise} Resolves to info
+   * * @example
+```js
+// turn first discovered light off
+light.info()
+  .then(info => {
+    console.log(info)
+  })
+```
    */
   info () {
     return this.send({system: {get_sysinfo: {}}})
