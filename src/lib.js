@@ -36,6 +36,10 @@ const scan = Bulb.scan()
       const jsonMsg = JSON.parse(decryptedMsg)
       const sysinfo = jsonMsg.system.get_sysinfo
 
+      if (sysinfo.mic_type !== 'IOT.SMARTBULB') {
+        return
+      }
+
       const light = new Bulb(rinfo.address)
       light._info = rinfo
       light._sysinfo = sysinfo
