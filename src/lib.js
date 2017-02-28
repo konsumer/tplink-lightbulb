@@ -32,8 +32,18 @@ const scan = Bulb.scan()
       client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
     })
     client.on('message', (msg, rinfo) => {
+      const decryptedMsg = this.decrypt(msg).toString('ascii')
+      const jsonMsg = JSON.parse(decryptedMsg)
+      const sysinfo = jsonMsg.system.get_sysinfo
+
       const light = new Bulb(rinfo.address)
       light._info = rinfo
+      light._sysinfo = sysinfo
+      light.host = rinfo.address
+      light.port = rinfo.port
+      light.name = sysinfo.alias
+      light.deviceId = sysinfo.deviceId
+
       emitter.emit('light', light)
     })
     emitter.stop = () => client.close()
@@ -266,4 +276,3 @@ const decrypted = Bulb.decrypt(encrypted)
     return Bulb.decrypt(buffer, key)
   }
 }
-
