@@ -31,6 +31,7 @@ Commands:
 Options:
   -?, --help        Show help                                          [boolean]
   --timeout         Timeout for scan (in seconds)                   [default: 0]
+  --filter          filter to a specific class of devices (ie: IOT.SMARTBULB)
   --transition, -t  Transition time (for on/off)                    [default: 0]
   --hue, -h         Hue of lightbulb (for on)
   --saturation, -s  Saturation of color (for on)
