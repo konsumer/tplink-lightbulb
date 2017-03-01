@@ -15,7 +15,7 @@ var argv = yargs
   .command('raw', 'Send a raw JSON command')
   .command('details', 'Get details about the device')
 
-  .example('$0 scan --timeout=1', 'Get list of lightbulbs on your network, stop after 1 second')
+  .example('$0 scan --timeout=1', 'Get list of TP-Link smart devices on your network, stop after 1 second')
   .example('$0 on 10.0.0.200', 'Turn on a light')
   .example('$0 off 10.0.0.200', 'Turn off a light')
 
@@ -43,6 +43,9 @@ var argv = yargs
   .nargs('timeout', 1)
   .describe('timeout', 'Timeout for scan (in seconds)')
   .default('timeout', 0)
+
+  .nargs('filter', 1)
+  .describe('filter', 'filter to a specific class of devices (ie: IOT.SMARTBULB)')
 
   .argv
 
@@ -94,7 +97,7 @@ switch (command) {
       .then(r => console.log(r))
     break
   case 'scan':
-    const scan = Bulb.scan()
+    const scan = Bulb.scan(argv.filter)
       .on('light', light => {
         console.log(light._info.address, '-', light._info.alias)
       })
