@@ -9,6 +9,7 @@ module.exports = class Bulb {
   /**
    * Scan for lightbulbs on your network
    * @module scan
+   * @param {Boolean} onlyBulbs Exclude devices not identified as bulbs
    * @return {EventEmitter} Emit `light` events when lightbulbs are found
    * @example
 ```js
@@ -23,7 +24,7 @@ const scan = Bulb.scan()
   })
 ```
    */
-  static scan () {
+  static scan (onlyBulbs = false) {
     const emitter = new EventEmitter()
     const client = dgram.createSocket('udp4')
     client.bind(9998, undefined, () => {
@@ -32,8 +33,22 @@ const scan = Bulb.scan()
       client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
     })
     client.on('message', (msg, rinfo) => {
+      const decryptedMsg = this.decrypt(msg).toString('ascii')
+      const jsonMsg = JSON.parse(decryptedMsg)
+      const sysinfo = jsonMsg.system.get_sysinfo
+
+      if (onlyBulbs && sysinfo.mic_type !== 'IOT.SMARTBULB') {
+        return
+      }
+
       const light = new Bulb(rinfo.address)
       light._info = rinfo
+      light._sysinfo = sysinfo
+      light.host = rinfo.address
+      light.port = rinfo.port
+      light.name = sysinfo.alias
+      light.deviceId = sysinfo.deviceId
+
       emitter.emit('light', light)
     })
     emitter.stop = () => client.close()
@@ -266,4 +281,3 @@ const decrypted = Bulb.decrypt(encrypted)
     return Bulb.decrypt(buffer, key)
   }
 }
-
