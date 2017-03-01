@@ -6,7 +6,8 @@
   "scripts": {
     "release": "npm run build && npm version patch -m 'Bumped to %s.'",
     "postversion": "git push && git push --tags",
-    "build": "babel src/lib.js > build/lib.js && babel src/cli.js > build/cli.js"
+    "build": "babel src/lib.js > build/lib.js && babel src/cli.js > build/cli.js",
+    "doc": "jsdoc2md src/lib.js"
   },
   "bin": {
     "tplight": "build/cli.js"
@@ -23,7 +24,8 @@
   "homepage": "https://github.com/konsumer/tplink-lightbulb#readme",
   "devDependencies": {
     "babel-cli": "^6.18.0",
-    "babel-preset-latest": "^6.16.0"
+    "babel-preset-latest": "^6.16.0",
+    "jsdoc-to-markdown": "^3.0.0"
   },
   "keywords": [
     "tp-link",
