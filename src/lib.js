@@ -26,7 +26,10 @@ const scan = Bulb.scan()
    */
   static scan (filter) {
     const emitter = new EventEmitter()
-    const client = dgram.createSocket('udp4')
+    const client = dgram.createSocket({
+      type: 'udp4',
+      reuseAddr: true
+    });
     client.bind(9998, undefined, () => {
       client.setBroadcast(true)
       const msgBuf = Bulb.encrypt(new Buffer('{"system":{"get_sysinfo":{}}}'))
