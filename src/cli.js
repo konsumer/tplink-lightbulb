@@ -2,7 +2,7 @@
 
 import Bulb from './lib'
 import yargs from 'yargs'
-import { hex_to_hsl } from 'colorsys'
+import { hexToHsl } from 'colorsys'
 
 const arg = yargs
   .usage('Usage: $0 <COMMAND>')
@@ -40,10 +40,16 @@ const arg = yargs
       .default('transition', 0)
       .describe('t', 'Transition time')
 
+      .alias('brightness', 'b')
+      .nargs('brightness', 1)
+      .default('brightness', 100)
+      .describe('b', 'Brightness')
+
       .example('$0 on 10.0.0.200', 'Turn on a light')
       .example('$0 on -t 10 10.0.0.200', 'Take 10 seconds to turn on a light')
   }, argv => {
-    (new Bulb(argv.ip)).set(true, argv.transition)
+    const bulb = new Bulb(argv.ip)
+    bulb.set(true, argv.transition, {brightness: argv.brightness})
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
@@ -57,7 +63,8 @@ const arg = yargs
       .example('$0 off 10.0.0.200', 'Turn off a light')
       .example('$0 off -t 10 10.0.0.200', 'Take 10 seconds to turn off a light')
   }, argv => {
-    (new Bulb(argv.ip)).set(false, argv.transition)
+    const bulb = new Bulb(argv.ip)
+    bulb.set(false, argv.transition)
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
@@ -71,7 +78,8 @@ const arg = yargs
       .example('$0 temp 10.0.0.200 1', 'Set color-temp to orangish')
       .example('$0 temp 10.0.0.200 10000', 'Set color-temp to bluish')
   }, argv => {
-    (new Bulb(argv.ip)).set(true, argv.transition, {color_temp: argv.color})
+    const bulb = new Bulb(argv.ip)
+    bulb.set(true, argv.transition, {color_temp: argv.color})
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
@@ -82,11 +90,12 @@ const arg = yargs
       .default('transition', 0)
       .describe('t', 'Transition time')
 
-      .example('$0 hex 10.0.0.200 #48258b', 'Set the lightbulb to a nice shade of purple.')
-      .example('$0 hex -t 10 10.0.0.200 #48258b', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
+      .example('$0 hex 10.0.0.200 "#48258b"', 'Set the lightbulb to a nice shade of purple.')
+      .example('$0 hex -t 10 10.0.0.200 "#48258b"', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
   }, argv => {
-    const color = hex_to_hsl(argv.color)
-    (new Bulb(argv.ip)).set(true, argv.transition, {hue: color.h, saturation: color.s, brightness: color.l})
+    const color = hexToHsl(argv.color)
+    const bulb = new Bulb(argv.ip)
+    bulb.set(true, argv.transition, {hue: color.h, saturation: color.s, brightness: color.l})
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
@@ -98,25 +107,29 @@ const arg = yargs
       .describe('t', 'Transition time')
 
       .example('$0 hsb 10.0.0.200 72 58 35', 'Set the lightbulb to a nice shade of purple.')
-      .example('$0 hex -t 10 10.0.0.200 72 58 35', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
+      .example('$0 hsb -t 10 10.0.0.200 72 58 35', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
   }, argv => {
     const {transition, ...options} = argv
-    (new Bulb(argv.ip)).set(true, transition, options)
+    const bulb = new Bulb(argv.ip)
+    bulb.set(true, transition, options)
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
   .command('cloud <ip>', 'Get cloud info', {}, argv => {
-    (new Bulb(argv.ip)).cloud()
+    const bulb = new Bulb(argv.ip)
+    bulb.cloud()
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
   .command('raw <ip> <json>', 'Send a raw JSON command', {}, argv => {
-    (new Bulb(argv.ip)).send(JSON.parse(argv.json))
+    const bulb = new Bulb(argv.ip)
+    bulb.send(JSON.parse(argv.json))
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
   .command('details <ip>', 'Get details about the device', {}, argv => {
-    (new Bulb(argv.ip)).details()
+    const bulb = new Bulb(argv.ip)
+    bulb.details()
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 

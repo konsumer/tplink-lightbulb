@@ -141,11 +141,11 @@ light.set(true)
         'transition_light_state': {
           'ignore_default': 1,
           'on_off': power ? 1 : 0,
-          'transition_period': transition
+          'transition_period': transition,
+          ...options
         }
       }
     }
-    msg.transition_light_state = Object.assign(msg.transition_light_state, options)
     return this.send(msg)
       .then(r => r['smartlife.iot.smartbulb.lightingservice']['transition_light_state'])
   }
