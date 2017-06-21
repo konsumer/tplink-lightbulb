@@ -29,7 +29,7 @@ const scan = Bulb.scan()
     const client = dgram.createSocket({
       type: 'udp4',
       reuseAddr: true
-    });
+    })
     client.bind(9998, undefined, () => {
       client.setBroadcast(true)
       const msgBuf = Bulb.encrypt(new Buffer('{"system":{"get_sysinfo":{}}}'))
@@ -104,7 +104,7 @@ light.send({
         return reject(new Error('IP not set.'))
       }
       const client = dgram.createSocket('udp4')
-      const message = this.encrypt(new Buffer(JSON.stringify(msg)))
+      const message = this.encrypt(Buffer.from(JSON.stringify(msg)))
       client.send(message, 0, message.length, 9999, this.ip, (err, bytes) => {
         if (err) {
           return reject(err)
