@@ -39,15 +39,15 @@ Options:
   -?, --help  Show help                                                [boolean]
 
 Examples:
-  build/cli.js scan -?     Get more detailed help with `scan` command
-  build/cli.js on -?       Get more detailed help with `on` command
-  build/cli.js off -?      Get more detailed help with `off` command
-  build/cli.js temp -?     Get more detailed help with `temp` command
-  build/cli.js hex -?      Get more detailed help with `hex` command
-  build/cli.js hsb -?      Get more detailed help with `hsb` command
-  build/cli.js cloud -?    Get more detailed help with `cloud` command
-  build/cli.js raw -?      Get more detailed help with `raw` command
-  build/cli.js details -?  Get more detailed help with `details` command
+  tplight scan -?     Get more detailed help with `scan` command
+  tplight on -?       Get more detailed help with `on` command
+  tplight off -?      Get more detailed help with `off` command
+  tplight temp -?     Get more detailed help with `temp` command
+  tplight hex -?      Get more detailed help with `hex` command
+  tplight hsb -?      Get more detailed help with `hsb` command
+  tplight cloud -?    Get more detailed help with `cloud` command
+  tplight raw -?      Get more detailed help with `raw` command
+  tplight details -?  Get more detailed help with `details` command
 ```
 
 ## wireshark
