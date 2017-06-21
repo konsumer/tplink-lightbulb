@@ -18,31 +18,36 @@ npm i -g tplink-lightbulb
 Now, you can use it like this:
 
 ```
-Usage: tplight <COMMAND> <IP_ADDRESS> [options] [<JSON>]
+Usage: tplight <COMMAND>
 
 Commands:
-  scan     Scan for lightbulbs
-  on       Turn on lightbulb
-  off      Turn off lightbulb
-  cloud    Get cloud info
-  raw      Send a raw JSON command
-  details  Get details about the device
+  scan                                      Scan for lightbulbs
+  on <ip>                                   Turn on lightbulb
+  off <ip>                                  Turn off lightbulb
+  temp <ip> <color>                         Set the color-temperature of the
+                                            lightbulb (for those that support
+                                            it)
+  hex <ip> <color>                          Set color of lightbulb using hex
+                                            color (for those that support it)
+  hsb <ip> <hue> <saturation> <brightness>  Set color of lightbulb using HSB
+                                            color (for those that support it)
+  cloud <ip>                                Get cloud info
+  raw <ip> <json>                           Send a raw JSON command
+  details <ip>                              Get details about the device
 
 Options:
-  -?, --help        Show help                                          [boolean]
-  --timeout         Timeout for scan (in seconds)                   [default: 0]
-  --filter          filter to a specific class of devices (ie: IOT.SMARTBULB)
-  --transition, -t  Transition time (for on/off)                    [default: 0]
-  --hue, -h         Hue of lightbulb (for on)
-  --saturation, -s  Saturation of color (for on)
-  --color, -c       Color temperature (for on)
-  --brightness, -b  Brightness of light (for on)
+  -?, --help  Show help                                                [boolean]
 
 Examples:
-  tplight scan --timeout=1  Get list of lightbulbs on your network, stop
-                                 after 1 second
-  tplight on 10.0.0.200     Turn on a light
-  tplight off 10.0.0.200    Turn off a light
+  build/cli.js scan -?     Get more detailed help with `scan` command
+  build/cli.js on -?       Get more detailed help with `on` command
+  build/cli.js off -?      Get more detailed help with `off` command
+  build/cli.js temp -?     Get more detailed help with `temp` command
+  build/cli.js hex -?      Get more detailed help with `hex` command
+  build/cli.js hsb -?      Get more detailed help with `hsb` command
+  build/cli.js cloud -?    Get more detailed help with `cloud` command
+  build/cli.js raw -?      Get more detailed help with `raw` command
+  build/cli.js details -?  Get more detailed help with `details` command
 ```
 
 ## library
