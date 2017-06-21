@@ -32,7 +32,7 @@ const scan = Bulb.scan()
     })
     client.bind(9998, undefined, () => {
       client.setBroadcast(true)
-      const msgBuf = Bulb.encrypt(new Buffer('{"system":{"get_sysinfo":{}}}'))
+      const msgBuf = Bulb.encrypt(Buffer.from('{"system":{"get_sysinfo":{}}}'))
       client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
     })
     client.on('message', (msg, rinfo) => {
