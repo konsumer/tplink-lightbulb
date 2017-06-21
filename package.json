@@ -25,6 +25,7 @@
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-preset-latest": "^6.16.0",
+    "babel-preset-stage-2": "^6.24.1",
     "jsdoc-to-markdown": "^3.0.0"
   },
   "keywords": [
@@ -34,11 +35,13 @@
     "LB120"
   ],
   "dependencies": {
+    "colorsys": "^1.0.10",
     "yargs": "^6.6.0"
   },
   "babel": {
     "presets": [
-      "latest"
+      "latest",
+      "stage-2"
     ]
   }
 }
