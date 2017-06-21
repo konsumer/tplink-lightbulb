@@ -139,14 +139,13 @@ light.set(true)
     const msg = {
       'smartlife.iot.smartbulb.lightingservice': {
         'transition_light_state': {
+          'ignore_default': 1,
           'on_off': power ? 1 : 0,
           'transition_period': transition
         }
       }
     }
-    Object.keys(options).forEach(i => {
-      msg['smartlife.iot.smartbulb.lightingservice']['transition_light_state'][i] = options[i]
-    })
+    msg.transition_light_state = Object.assign(msg.transition_light_state, options)
     return this.send(msg)
       .then(r => r['smartlife.iot.smartbulb.lightingservice']['transition_light_state'])
   }
