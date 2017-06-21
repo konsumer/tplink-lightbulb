@@ -61,14 +61,14 @@ const arg = yargs
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
-  .command('temp <ip> <color>', 'Set the temperature of the lightbulb (for those that support it)', yarg => {
+  .command('temp <ip> <color>', 'Set the color-temperature of the lightbulb (for those that support it)', yarg => {
     yarg
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
       .describe('t', 'Transition time')
 
-      .example('$0 temp 10.0.0.200 1', 'Set color-temp to warm')
+      .example('$0 temp 10.0.0.200 1', 'Set color-temp to orangish')
       .example('$0 temp 10.0.0.200 10000', 'Set color-temp to bluish')
   }, argv => {
     (new Bulb(argv.ip)).set(true, argv.transition, {color_temp: argv.color})
