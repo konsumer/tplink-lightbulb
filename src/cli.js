@@ -79,7 +79,7 @@ const arg = yargs
       .example('$0 temp 10.0.0.200 10000', 'Set color-temp to bluish')
   }, argv => {
     const bulb = new Bulb(argv.ip)
-    bulb.set(true, argv.transition, {color_temp: argv.color})
+    bulb.set(true, argv.transition, {hue: 0, saturation: 0, color_temp: argv.color})
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
@@ -95,7 +95,7 @@ const arg = yargs
   }, argv => {
     const color = hexToHsl(argv.color)
     const bulb = new Bulb(argv.ip)
-    bulb.set(true, argv.transition, {hue: color.h, saturation: color.s, brightness: color.l})
+    bulb.set(true, argv.transition, {hue: color.h, saturation: color.s, brightness: color.l, color_temp: 0})
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
@@ -109,9 +109,9 @@ const arg = yargs
       .example('$0 hsb 10.0.0.200 72 58 35', 'Set the lightbulb to a nice shade of purple.')
       .example('$0 hsb -t 10 10.0.0.200 72 58 35', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
   }, argv => {
-    const {transition, ...options} = argv
+    const {transition, hue, saturation, brightness} = argv
     const bulb = new Bulb(argv.ip)
-    bulb.set(true, transition, options)
+    bulb.set(true, transition, {color_temp: 0, hue, saturation, brightness})
       .then(r => console.log(JSON.stringify(r, null, 2)))
   })
 
