@@ -311,4 +311,4 @@ const decrypted = Bulb.decrypt(encrypted)
 
 ## thanks
 
-Thanks to [hs100-api](https://github.com/plasticrake/hs100-api) to for some good ideas, and [tplink-smartplug](https://github.com/softScheck/tplink-smartplug) for a good start to a wireshark dissector and some good ideas.
+Thanks to [hs100-api](https://github.com/plasticrake/hs100-api) to for some good ideas, and [tplink-smartplug](https://github.com/softScheck/tplink-smartplug) for a good start to a wireshark dissector and some good ideas. @DaveGut really helped with bulb-hacking and research on LB130's.
