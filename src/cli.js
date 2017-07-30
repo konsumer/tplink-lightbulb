@@ -8,7 +8,7 @@ const arg = yargs
   .usage('Usage: $0 <COMMAND>')
   .help('?')
   .alias('?', 'help')
-
+  //test
   .command('scan', 'Scan for lightbulbs', yarg => {
     yarg
       .alias('timeout', 't')
