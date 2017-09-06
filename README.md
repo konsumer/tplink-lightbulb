@@ -64,6 +64,10 @@ I connected the lights to that network (reset them to factory default by turning
 
 After I did stuff like switch the lights on/off in app, I open the pcap file in wireshark on my desktop.
 
+## sound
+
+Kyle Dixon made [a cool beat-match script](https://github.com/konsumer/tplink-lightbulb/wiki/Beatmatch) for syncing lights to music.
+
 ## library
 
 You can install it in your project like this:
