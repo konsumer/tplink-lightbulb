@@ -36,18 +36,18 @@ Commands:
   details <ip>                              Get details about the device
 
 Options:
-  -?, --help  Show help                                                [boolean]
+  -h, --help  Show help                                                [boolean]
 
 Examples:
-  tplight scan -?     Get more detailed help with `scan` command
-  tplight on -?       Get more detailed help with `on` command
-  tplight off -?      Get more detailed help with `off` command
-  tplight temp -?     Get more detailed help with `temp` command
-  tplight hex -?      Get more detailed help with `hex` command
-  tplight hsb -?      Get more detailed help with `hsb` command
-  tplight cloud -?    Get more detailed help with `cloud` command
-  tplight raw -?      Get more detailed help with `raw` command
-  tplight details -?  Get more detailed help with `details` command
+  tplight scan -h     Get more detailed help with `scan` command
+  tplight on -h       Get more detailed help with `on` command
+  tplight off -h      Get more detailed help with `off` command
+  tplight temp -h     Get more detailed help with `temp` command
+  tplight hex -h      Get more detailed help with `hex` command
+  tplight hsb -h      Get more detailed help with `hsb` command
+  tplight cloud -h    Get more detailed help with `cloud` command
+  tplight raw -h      Get more detailed help with `raw` command
+  tplight details -h  Get more detailed help with `details` command
 ```
 
 ## wireshark

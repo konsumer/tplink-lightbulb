@@ -6,8 +6,8 @@ import { hexToHsl } from 'colorsys'
 
 const arg = yargs
   .usage('Usage: $0 <COMMAND>')
-  .help('?')
-  .alias('?', 'help')
+  .help('h')
+  .alias('h', 'help')
 
   .command('scan', 'Scan for lightbulbs', yarg => {
     yarg
@@ -35,6 +35,10 @@ const arg = yargs
 
   .command('on <ip>', 'Turn on lightbulb', yarg => {
     yarg
+      .boolean('quiet')
+      .describe('quiet', "Don't output return value of command")
+      .alias('quiet', 'q')
+
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
@@ -50,11 +54,16 @@ const arg = yargs
   }, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.set(true, argv.transition, {brightness: argv.brightness})
-      .then(r => console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .catch(console.error)
   })
 
   .command('off <ip>', 'Turn off lightbulb', yarg => {
     yarg
+      .boolean('quiet')
+      .describe('quiet', "Don't output return value of command")
+      .alias('quiet', 'q')
+
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
@@ -65,11 +74,16 @@ const arg = yargs
   }, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.set(false, argv.transition)
-      .then(r => console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .catch(console.error)
   })
 
   .command('temp <ip> <color>', 'Set the color-temperature of the lightbulb (for those that support it)', yarg => {
     yarg
+      .boolean('quiet')
+      .describe('quiet', "Don't output return value of command")
+      .alias('quiet', 'q')
+
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
@@ -80,11 +94,16 @@ const arg = yargs
   }, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.set(true, argv.transition, {hue: 0, saturation: 0, color_temp: argv.color})
-      .then(r => console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .catch(console.error)
   })
 
   .command('hex <ip> <color>', 'Set color of lightbulb using hex color (for those that support it)', yarg => {
     yarg
+      .boolean('quiet')
+      .describe('quiet', "Don't output return value of command")
+      .alias('quiet', 'q')
+
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
@@ -96,11 +115,16 @@ const arg = yargs
     const color = hexToHsl(argv.color)
     const bulb = new Bulb(argv.ip)
     bulb.set(true, argv.transition, {hue: color.h, saturation: color.s, brightness: color.l, color_temp: 0})
-      .then(r => console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .catch(console.error)
   })
 
   .command('hsb <ip> <hue> <saturation> <brightness>', 'Set color of lightbulb using HSB color (for those that support it)', yarg => {
     yarg
+      .boolean('quiet')
+      .describe('quiet', "Don't output return value of command")
+      .alias('quiet', 'q')
+
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
@@ -112,37 +136,41 @@ const arg = yargs
     const {transition, hue, saturation, brightness} = argv
     const bulb = new Bulb(argv.ip)
     bulb.set(true, transition, {color_temp: 0, hue, saturation, brightness})
-      .then(r => console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .catch(console.error)
   })
 
   .command('cloud <ip>', 'Get cloud info', {}, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.cloud()
       .then(r => console.log(JSON.stringify(r, null, 2)))
+      .catch(console.error)
   })
 
   .command('raw <ip> <json>', 'Send a raw JSON command', {}, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.send(JSON.parse(argv.json))
-      .then(r => console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .catch(console.error)
   })
 
   .command('details <ip>', 'Get details about the device', {}, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.details()
       .then(r => console.log(JSON.stringify(r, null, 2)))
+      .catch(console.error)
   })
 
   .demandCommand(1, 1, 'You need a command.')
 
-  .example('$0 scan -?', 'Get more detailed help with `scan` command')
-  .example('$0 on -?', 'Get more detailed help with `on` command')
-  .example('$0 off -?', 'Get more detailed help with `off` command')
-  .example('$0 temp -?', 'Get more detailed help with `temp` command')
-  .example('$0 hex -?', 'Get more detailed help with `hex` command')
-  .example('$0 hsb -?', 'Get more detailed help with `hsb` command')
-  .example('$0 cloud -?', 'Get more detailed help with `cloud` command')
-  .example('$0 raw -?', 'Get more detailed help with `raw` command')
-  .example('$0 details -?', 'Get more detailed help with `details` command')
+  .example('$0 scan -h', 'Get more detailed help with `scan` command')
+  .example('$0 on -h', 'Get more detailed help with `on` command')
+  .example('$0 off -h', 'Get more detailed help with `off` command')
+  .example('$0 temp -h', 'Get more detailed help with `temp` command')
+  .example('$0 hex -h', 'Get more detailed help with `hex` command')
+  .example('$0 hsb -h', 'Get more detailed help with `hsb` command')
+  .example('$0 cloud -h', 'Get more detailed help with `cloud` command')
+  .example('$0 raw -h', 'Get more detailed help with `raw` command')
+  .example('$0 details -h', 'Get more detailed help with `details` command')
 
   .argv
