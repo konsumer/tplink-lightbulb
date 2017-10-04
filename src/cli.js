@@ -42,7 +42,7 @@ const arg = yargs
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
-      .describe('t', 'Transition time')
+      .describe('t', 'Transition time (in ms)')
 
       .alias('brightness', 'b')
       .nargs('brightness', 1)
@@ -67,7 +67,7 @@ const arg = yargs
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
-      .describe('t', 'Transition time')
+      .describe('t', 'Transition time (in ms)')
 
       .example('$0 off 10.0.0.200', 'Turn off a light')
       .example('$0 off -t 10 10.0.0.200', 'Take 10 seconds to turn off a light')
@@ -87,7 +87,7 @@ const arg = yargs
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
-      .describe('t', 'Transition time')
+      .describe('t', 'Transition time (in ms)')
 
       .example('$0 temp 10.0.0.200 1', 'Set color-temp to orangish')
       .example('$0 temp 10.0.0.200 10000', 'Set color-temp to bluish')
@@ -107,7 +107,7 @@ const arg = yargs
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
-      .describe('t', 'Transition time')
+      .describe('t', 'Transition time (in ms)')
 
       .example('$0 hex 10.0.0.200 "#48258b"', 'Set the lightbulb to a nice shade of purple.')
       .example('$0 hex -t 10 10.0.0.200 "#48258b"', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
@@ -128,7 +128,7 @@ const arg = yargs
       .alias('transition', 't')
       .nargs('transition', 1)
       .default('transition', 0)
-      .describe('t', 'Transition time')
+      .describe('t', 'Transition time (in ms)')
 
       .example('$0 hsb 10.0.0.200 72 58 35', 'Set the lightbulb to a nice shade of purple.')
       .example('$0 hsb -t 10 10.0.0.200 72 58 35', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
