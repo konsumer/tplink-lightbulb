@@ -36,7 +36,7 @@ const arg = yargs
   }, argv => {
     const scan = Bulb.scan(argv.filter)
       .on('light', light => {
-        console.log(light._info.address, '-', light._info.alias)
+        console.log(`${light._info.address} - ${light._sysinfo.alias} - ${light._sysinfo.model}`)
       })
     if (argv.timeout) {
       setTimeout(() => { scan.stop() }, argv.timeout * 1000)
