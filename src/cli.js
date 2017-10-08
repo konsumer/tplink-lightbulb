@@ -8,6 +8,18 @@ const arg = yargs
   .usage('Usage: $0 <COMMAND>')
   .help('h')
   .alias('h', 'help')
+  .demandCommand(1, 1, 'You need a command.')
+  .version()
+
+  .example('$0 scan -h', 'Get more detailed help with `scan` command')
+  .example('$0 on -h', 'Get more detailed help with `on` command')
+  .example('$0 off -h', 'Get more detailed help with `off` command')
+  .example('$0 temp -h', 'Get more detailed help with `temp` command')
+  .example('$0 hex -h', 'Get more detailed help with `hex` command')
+  .example('$0 hsb -h', 'Get more detailed help with `hsb` command')
+  .example('$0 cloud -h', 'Get more detailed help with `cloud` command')
+  .example('$0 raw -h', 'Get more detailed help with `raw` command')
+  .example('$0 details -h', 'Get more detailed help with `details` command')
 
   .command('scan', 'Scan for lightbulbs', yarg => {
     yarg
@@ -165,17 +177,5 @@ const arg = yargs
     })
     .catch(console.error)
   })
-
-  .demandCommand(1, 1, 'You need a command.')
-
-  .example('$0 scan -h', 'Get more detailed help with `scan` command')
-  .example('$0 on -h', 'Get more detailed help with `on` command')
-  .example('$0 off -h', 'Get more detailed help with `off` command')
-  .example('$0 temp -h', 'Get more detailed help with `temp` command')
-  .example('$0 hex -h', 'Get more detailed help with `hex` command')
-  .example('$0 hsb -h', 'Get more detailed help with `hsb` command')
-  .example('$0 cloud -h', 'Get more detailed help with `cloud` command')
-  .example('$0 raw -h', 'Get more detailed help with `raw` command')
-  .example('$0 details -h', 'Get more detailed help with `details` command')
 
   .argv
