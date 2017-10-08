@@ -3,6 +3,9 @@
 import Bulb from './lib'
 import yargs from 'yargs'
 import { hexToHsl } from 'colorsys'
+import jc from 'json-colorizer'
+
+const json = process.stdout.isTTY ? s => console.log(jc(JSON.stringify(s, null, 2))) : s => console.log(JSON.stringify(s, null, 2))
 
 const arg = yargs
   .usage('Usage: $0 <COMMAND>')
@@ -66,7 +69,7 @@ const arg = yargs
   }, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.set(true, argv.transition, {brightness: argv.brightness})
-      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
 
@@ -86,7 +89,7 @@ const arg = yargs
   }, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.set(false, argv.transition)
-      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
 
@@ -106,7 +109,7 @@ const arg = yargs
   }, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.set(true, argv.transition, {hue: 0, saturation: 0, color_temp: argv.color})
-      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
 
@@ -127,7 +130,7 @@ const arg = yargs
     const color = hexToHsl(argv.color)
     const bulb = new Bulb(argv.ip)
     bulb.set(true, argv.transition, {hue: color.h, saturation: color.s, brightness: color.l, color_temp: 0})
-      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
 
@@ -148,21 +151,21 @@ const arg = yargs
     const {transition, hue, saturation, brightness} = argv
     const bulb = new Bulb(argv.ip)
     bulb.set(true, transition, {color_temp: 0, hue, saturation, brightness})
-      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
 
   .command('cloud <ip>', 'Get cloud info', {}, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.cloud()
-      .then(r => console.log(JSON.stringify(r, null, 2)))
+      .then(r => json(r))
       .catch(console.error)
   })
 
   .command('raw <ip> <json>', 'Send a raw JSON command', {}, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.send(JSON.parse(argv.json))
-      .then(r => argv.quiet || console.log(JSON.stringify(r, null, 2)))
+      .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
 
@@ -173,7 +176,7 @@ const arg = yargs
       bulb.info()
     ])
     .then(([info, details]) => {
-      console.log(JSON.stringify({...details, ...info}, null, 2))
+      json({...details, ...info})
     })
     .catch(console.error)
   })
