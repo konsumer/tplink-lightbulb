@@ -156,14 +156,14 @@ const arg = yargs
 
   .command('details <ip>', 'Get details about the device', {}, argv => {
     const bulb = new Bulb(argv.ip)
-    bulb.details()
-      .then(details => {
-        bulb.info()
-          .then(info => {
-            console.log(JSON.stringify({...details, ...info}, null, 2))
-          })
-      })
-      .catch(console.error)
+    Promise.all([
+      bulb.details(),
+      bulb.info()
+    ])
+    .then(([info, details]) => {
+      console.log(JSON.stringify({...details, ...info}, null, 2))
+    })
+    .catch(console.error)
   })
 
   .demandCommand(1, 1, 'You need a command.')
