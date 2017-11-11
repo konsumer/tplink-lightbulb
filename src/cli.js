@@ -155,6 +155,27 @@ const arg = yargs
       .catch(console.error)
   })
 
+  .command('bright <ip> <brightness>', 'Set brightness % (for those that support it)', yarg => {
+    yarg
+      .boolean('quiet')
+      .describe('quiet', "Don't output return value of command")
+      .alias('quiet', 'q')
+
+      .alias('transition', 't')
+      .nargs('transition', 1)
+      .default('transition', 0)
+      .describe('t', 'Transition time (in ms)')
+
+      .example('$0 bright 10.0.0.200 35', 'Set the lightbulb brightness to 35%.')
+      .example('$0 bright -t 10 10.0.0.200 35', 'Take 10 seconds to set the lightbulb brightness to 35%.')
+  }, argv => {
+    const {transition, brightness} = argv
+    const bulb = new Bulb(argv.ip)
+    bulb.set(false, transition, {brightness})
+      .then(r => argv.quiet || json(r))
+      .catch(console.error)
+  })
+
   .command('cloud <ip>', 'Get cloud info', {}, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.cloud()
