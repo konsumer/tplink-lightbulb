@@ -238,6 +238,11 @@ light.details()
     return this.send({'smartlife.iot.smartbulb.lightingservice': {'get_light_details': {}}})
       .then(r => r['smartlife.iot.smartbulb.lightingservice']['get_light_details'])
   }
+  /* Get current bulb status/light-state */
+  status () {
+    return this.send({'smartlife.iot.smartbulb.lightingservice': {'get_light_state': {}}})
+      .then(r => r['smartlife.iot.smartbulb.lightingservice']['get_light_state'])
+  }
 
   /**
    * Badly encrypt message in format bulbs use

@@ -202,4 +202,15 @@ const arg = yargs
     .catch(console.error)
   })
 
+  .command('status <ip>', 'Get the device current status/light-state.', {}, argv => {
+    const bulb = new Bulb(argv.ip)
+    Promise.all([
+      bulb.status()
+    ])
+    .then(([status]) => {
+      json({...status})
+    })
+    .catch(console.error)
+  })
+
   .argv
