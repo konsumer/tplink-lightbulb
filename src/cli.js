@@ -65,7 +65,7 @@ const arg = yargs
       .describe('b', 'Brightness')
 
       .example('$0 on 10.0.0.200', 'Turn on a light')
-      .example('$0 on -t 10 10.0.0.200', 'Take 10 seconds to turn on a light')
+      .example('$0 on -t 10000 10.0.0.200', 'Take 10 seconds to turn on a light')
   }, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.set(true, argv.transition, {brightness: argv.brightness})
@@ -85,7 +85,7 @@ const arg = yargs
       .describe('t', 'Transition time (in ms)')
 
       .example('$0 off 10.0.0.200', 'Turn off a light')
-      .example('$0 off -t 10 10.0.0.200', 'Take 10 seconds to turn off a light')
+      .example('$0 off -t 10000 10.0.0.200', 'Take 10 seconds to turn off a light')
   }, argv => {
     const bulb = new Bulb(argv.ip)
     bulb.set(false, argv.transition)
@@ -125,7 +125,7 @@ const arg = yargs
       .describe('t', 'Transition time (in ms)')
 
       .example('$0 hex 10.0.0.200 "#48258b"', 'Set the lightbulb to a nice shade of purple.')
-      .example('$0 hex -t 10 10.0.0.200 "#48258b"', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
+      .example('$0 hex -t 10000 10.0.0.200 "#48258b"', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
   }, argv => {
     const color = hexToHsl(argv.color)
     const bulb = new Bulb(argv.ip)
@@ -146,7 +146,7 @@ const arg = yargs
       .describe('t', 'Transition time (in ms)')
 
       .example('$0 hsb 10.0.0.200 72 58 35', 'Set the lightbulb to a nice shade of purple.')
-      .example('$0 hsb -t 10 10.0.0.200 72 58 35', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
+      .example('$0 hsb -t 10000 10.0.0.200 72 58 35', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
   }, argv => {
     const {transition, hue, saturation, brightness} = argv
     const bulb = new Bulb(argv.ip)
