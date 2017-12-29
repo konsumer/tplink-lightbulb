@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/konsumer/tplink-lightbulb#readme",
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-preset-latest": "^6.16.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-latest": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "jsdoc-to-markdown": "^3.0.0"
+    "jsdoc-to-markdown": "^3.0.3"
   },
   "keywords": [
     "tp-link",
@@ -36,9 +36,9 @@
     "LB120"
   ],
   "dependencies": {
-    "colorsys": "^1.0.10",
+    "colorsys": "^1.0.19",
     "json-colorizer": "^1.1.0",
-    "yargs": "^6.6.0"
+    "yargs": "^10.0.3"
   },
   "babel": {
     "presets": [
