@@ -309,6 +309,10 @@ Badly decrypt message from format bulbs use
 const decrypted = Bulb.decrypt(encrypted)
 ```
 
+## development
+
+I use [standard](https://standardjs.com/). You can auto-format your code with `standard --fix` and there's plugins for lots of editors.
+
 ## sound
 
 Kyle Dixon made [a cool beat-match script](https://github.com/konsumer/tplink-lightbulb/wiki/Beatmatch) for syncing lights to music.

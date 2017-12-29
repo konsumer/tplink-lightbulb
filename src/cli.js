@@ -7,7 +7,7 @@ import jc from 'json-colorizer'
 
 const json = process.stdout.isTTY ? s => console.log(jc(JSON.stringify(s, null, 2))) : s => console.log(JSON.stringify(s, null, 2))
 
-const arg = yargs
+export const arg = yargs
   .usage('Usage: $0 <COMMAND>')
   .help('h')
   .alias('h', 'help')

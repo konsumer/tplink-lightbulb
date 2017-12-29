@@ -38,6 +38,7 @@
   "dependencies": {
     "colorsys": "^1.0.19",
     "json-colorizer": "^1.1.0",
+    "safe-buffer": "^5.1.1",
     "yargs": "^10.0.3"
   },
   "babel": {

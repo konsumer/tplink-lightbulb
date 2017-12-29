@@ -1,9 +1,6 @@
 import dgram from 'dgram'
 import EventEmitter from 'events'
-
-// util to support old and new Buffer syntax
-const getBufferFromString = (string) => Buffer.from ? Buffer.from(string) : new Buffer(string)
-
+import { Buffer } from 'safe-buffer'
 
 module.exports = class Bulb {
   constructor (ip) {
@@ -36,7 +33,7 @@ const scan = Bulb.scan()
     })
     client.bind(9998, undefined, () => {
       client.setBroadcast(true)
-      const msgBuf = Bulb.encrypt(getBufferFromString('{"system":{"get_sysinfo":{}}}'))
+      const msgBuf = Bulb.encrypt(Buffer.from('{"system":{"get_sysinfo":{}}}'))
       client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
     })
     client.on('message', (msg, rinfo) => {
@@ -108,7 +105,7 @@ light.send({
         return reject(new Error('IP not set.'))
       }
       const client = dgram.createSocket('udp4')
-      const message = this.encrypt(getBufferFromString(JSON.stringify(msg)))
+      const message = this.encrypt(Buffer.from(JSON.stringify(msg)))
       client.send(message, 0, message.length, 9999, this.ip, (err, bytes) => {
         if (err) {
           return reject(err)
