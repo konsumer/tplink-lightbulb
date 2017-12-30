@@ -16,7 +16,7 @@ Not all TP-Link smart-home devices can do all things, here's the support-matrix:
 |------------------------------------------------------------------------:|:---:|:-------:|:--:|:---:|:----:|:---:|:---:|:-----:|
 | [LB120](http://www.tp-link.com/us/products/details/cat-5609_LB120.html) |  X  |    X    |  X |  X  |   X  |     |     |   X   |
 | [LB130](http://www.tp-link.com/us/products/details/cat-5609_LB130.html) |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |
-| [HS100](http://www.tp-link.com/us/products/details/cat-5516_HS100.html) |  X  |    X    |    |     |      |     |     |       |
+| [HS100](http://www.tp-link.com/us/products/details/cat-5516_HS100.html) |  X  |    X    |  X |  X  |      |     |     |       |
 | [HS105](http://www.tp-link.com/us/products/details/cat-5516_HS105.html) |  X  |    X    |  X |  X  |      |     |     |       |
 | [HS110](http://www.tp-link.com/us/products/details/cat-5516_HS110.html) |  X  |    X    |  X |  X  |      |     |     |       |
 | [HS200](http://www.tp-link.com/us/products/details/cat-5622_HS200.html) |  X  |    X    |  X |  X  |      |     |     |       |
