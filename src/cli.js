@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import Bulb from './lib'
+import TPLSmartDevice from './lib'
 import yargs from 'yargs'
 import { hexToHsl } from 'colorsys'
 import jc from 'json-colorizer'
@@ -37,7 +37,7 @@ export const arg = yargs
 
       .example('$0 scan -t 1', 'Get list of TP-Link smart devices on your network, stop after 1 second')
   }, argv => {
-    const scan = Bulb.scan(argv.filter)
+    const scan = TPLSmartDevice.scan(argv.filter)
       .on('light', light => {
         console.log(`${light._info.address} - ${light._sysinfo.alias} - ${light._sysinfo.model}`)
       })
@@ -67,8 +67,8 @@ export const arg = yargs
       .example('$0 on 10.0.0.200', 'Turn on a light')
       .example('$0 on -t 10000 10.0.0.200', 'Take 10 seconds to turn on a light')
   }, argv => {
-    const bulb = new Bulb(argv.ip)
-    bulb.set(true, argv.transition, {brightness: argv.brightness})
+    const bulb = new TPLSmartDevice(argv.ip)
+    bulb.power(true, argv.transition, {brightness: argv.brightness})
       .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
@@ -87,8 +87,8 @@ export const arg = yargs
       .example('$0 off 10.0.0.200', 'Turn off a light')
       .example('$0 off -t 10000 10.0.0.200', 'Take 10 seconds to turn off a light')
   }, argv => {
-    const bulb = new Bulb(argv.ip)
-    bulb.set(false, argv.transition)
+    const bulb = new TPLSmartDevice(argv.ip)
+    bulb.power(false, argv.transition)
       .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
@@ -107,8 +107,8 @@ export const arg = yargs
       .example('$0 temp 10.0.0.200 1', 'Set color-temp to orangish')
       .example('$0 temp 10.0.0.200 10000', 'Set color-temp to bluish')
   }, argv => {
-    const bulb = new Bulb(argv.ip)
-    bulb.set(true, argv.transition, {hue: 0, saturation: 0, color_temp: argv.color})
+    const bulb = new TPLSmartDevice(argv.ip)
+    bulb.power(true, argv.transition, {hue: 0, saturation: 0, color_temp: argv.color})
       .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
@@ -128,8 +128,8 @@ export const arg = yargs
       .example('$0 hex -t 10000 10.0.0.200 "#48258b"', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
   }, argv => {
     const color = hexToHsl(argv.color)
-    const bulb = new Bulb(argv.ip)
-    bulb.set(true, argv.transition, {hue: color.h, saturation: color.s, brightness: color.l, color_temp: 0})
+    const bulb = new TPLSmartDevice(argv.ip)
+    bulb.power(true, argv.transition, {hue: color.h, saturation: color.s, brightness: color.l, color_temp: 0})
       .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
@@ -149,28 +149,28 @@ export const arg = yargs
       .example('$0 hsb -t 10000 10.0.0.200 72 58 35', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
   }, argv => {
     const {transition, hue, saturation, brightness} = argv
-    const bulb = new Bulb(argv.ip)
-    bulb.set(true, transition, {color_temp: 0, hue, saturation, brightness})
+    const bulb = new TPLSmartDevice(argv.ip)
+    bulb.power(true, transition, {color_temp: 0, hue, saturation, brightness})
       .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
 
   .command('cloud <ip>', 'Get cloud info', {}, argv => {
-    const bulb = new Bulb(argv.ip)
+    const bulb = new TPLSmartDevice(argv.ip)
     bulb.cloud()
       .then(r => json(r))
       .catch(console.error)
   })
 
   .command('raw <ip> <json>', 'Send a raw JSON command', {}, argv => {
-    const bulb = new Bulb(argv.ip)
+    const bulb = new TPLSmartDevice(argv.ip)
     bulb.send(JSON.parse(argv.json))
       .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
 
   .command('details <ip>', 'Get details about the device', {}, argv => {
-    const bulb = new Bulb(argv.ip)
+    const bulb = new TPLSmartDevice(argv.ip)
     Promise.all([
       bulb.details(),
       bulb.info()

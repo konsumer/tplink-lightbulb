@@ -1,6 +1,7 @@
 <img src="http://s7d1.scene7.com/is/image/officedepot/945143_p_lb120_white_3?$OD-Dynamic$&wid=200&hei=200" align="right" alt="tested with LB120" />
 
 # tplink-lightbulb
+
 Control TP-Link smart-home devices from nodejs
 
 [![NPM](https://nodei.co/npm/tplink-lightbulb.png?compact=true)](https://nodei.co/npm/tplink-lightbulb/)
@@ -9,16 +10,19 @@ This will allow you to control TP-Link smart-home devices from nodejs or the com
 
 ## supported devices
 
-Not all TP-Link smart-home devices can do all things, and we're actively working on the smart-plugs, so here's the support-matrix:
+Not all TP-Link smart-home devices can do all things, here's the support-matrix:
 
 |                                                                         | raw | details | on | off | temp | hex | hsb | cloud |
 |------------------------------------------------------------------------:|:---:|:-------:|:--:|:---:|:----:|:---:|:---:|:-----:|
 | [LB120](http://www.tp-link.com/us/products/details/cat-5609_LB120.html) |  X  |    X    |  X |  X  |   X  |     |     |   X   |
 | [LB130](http://www.tp-link.com/us/products/details/cat-5609_LB130.html) |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |
 | [HS100](http://www.tp-link.com/us/products/details/cat-5516_HS100.html) |  X  |    X    |    |     |      |     |     |       |
-| [HS105](http://www.tp-link.com/us/products/details/cat-5516_HS105.html) |  X  |    X    |    |     |      |     |     |       |
-| [HS110](http://www.tp-link.com/us/products/details/cat-5516_HS110.html) |  X  |    X    |    |     |      |     |     |       |
-| [KP100](http://www.tp-link.com/us/products/details/cat-5516_KP100.html) |  X  |    X    |    |     |      |     |     |       |
+| [HS105](http://www.tp-link.com/us/products/details/cat-5516_HS105.html) |  X  |    X    |  X |  X  |      |     |     |       |
+| [HS110](http://www.tp-link.com/us/products/details/cat-5516_HS110.html) |  X  |    X    |  X |  X  |      |     |     |       |
+| [HS200](http://www.tp-link.com/us/products/details/cat-5622_HS200.html) |  X  |    X    |  X |  X  |      |     |     |       |
+| [KP100](http://www.tp-link.com/us/products/details/cat-5516_KP100.html) |  X  |    X    |  X |  X  |      |     |     |       |
+
+I have LB120, LB130, and HS105, so any testing (and packet-capture) with other devices would be greatly appreciated. 
 
 
 ## command-line
@@ -89,13 +93,13 @@ npm i -S tplink-lightbulb
 Include it in your project like this:
 
 ```js
-const Bulb = require('tplink-lightbulb')
+const TPLSmartDevice = require('tplink-lightbulb')
 ```
 
 or for ES6:
 
 ```js
-import Bulb from 'tplink-lightbulb'
+import TPLSmartDevice from 'tplink-lightbulb'
 ```
 
 ## API
@@ -105,13 +109,13 @@ import Bulb from 'tplink-lightbulb'
 <dd><p>Scan for lightbulbs on your network</p>
 </dd>
 <dt><a href="#module_info">info</a> ⇒ <code>Promise</code></dt>
-<dd><p>Get info about the Bulb</p>
+<dd><p>Get info about the TPLSmartDevice</p>
 </dd>
 <dt><a href="#module_send">send</a> ⇒ <code>Promise</code></dt>
 <dd><p>Send a message to a lightbulb (for RAW JS message objects)</p>
 </dd>
-<dt><a href="#module_set">set</a> ⇒ <code>Promise</code></dt>
-<dd><p>Change state of lightbulb</p>
+<dt><a href="#module_power">power</a> ⇒ <code>Promise</code></dt>
+<dd><p>Set power-state of lightbulb</p>
 </dd>
 <dt><a href="#module_daystat">daystat</a> ⇒ <code>Promise</code></dt>
 <dd><p>Get schedule info</p>
@@ -147,9 +151,9 @@ Scan for lightbulbs on your network
 **Example**  
 ```js
 // turn first discovered light off
-const scan = Bulb.scan()
+const scan = TPLSmartDevice.scan()
   .on('light', light => {
-    light.set(false)
+    light.power(false)
       .then(status => {
         console.log(status)
         scan.stop()
@@ -159,13 +163,13 @@ const scan = Bulb.scan()
 <a name="module_info"></a>
 
 ## info ⇒ <code>Promise</code>
-Get info about the Bulb
+Get info about the TPLSmartDevice
 
 **Returns**: <code>Promise</code> - Resolves to info  
 **Example**  
 ```js
 // get info about a light
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.info()
   .then(info => {
     console.log(info)
@@ -184,7 +188,7 @@ Send a message to a lightbulb (for RAW JS message objects)
 
 **Example**  
 ```js
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.send({
   'smartlife.iot.smartbulb.lightingservice': {
     'transition_light_state': {
@@ -197,24 +201,24 @@ light.send({
 })
 .catch(e => console.error(e))
 ```
-<a name="module_set"></a>
+<a name="module_power"></a>
 
-## set ⇒ <code>Promise</code>
-Change state of lightbulb
+## power ⇒ <code>Promise</code>
+Set power-state of lightbulb
 
 **Returns**: <code>Promise</code> - Resolves to output of command  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| power | <code>Boolean</code> | On or off |
+| powerState | <code>Boolean</code> | On or off |
 | transition | <code>Number</code> | Transition to new state in this time |
 | options | <code>Object</code> | Object containing `mode`, `hue`, `saturation`, `color_temp`, `brightness` |
 
 **Example**  
 ```js
 // turn a light on
-const light = new Bulb('10.0.0.200')
-light.set(true)
+const light = new TPLSmartDevice('10.0.0.200')
+light.power(true)
   .then(status => {
     console.log(status)
   })
@@ -235,7 +239,7 @@ Get schedule info
 **Example**  
 ```js
 // get the light's schedule for 1/2017
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.schedule(1, 2017)
   .then(schedule => {
     console.log(schedule)
@@ -251,7 +255,7 @@ Get cloud info from bulb
 **Example**  
 ```js
 // get the cloud info for the light
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.cloud()
   .then(info => {
     console.log(info)
@@ -267,7 +271,7 @@ Get schedule from bulb
 **Example**  
 ```js
 // get the bulb's schedule
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.schedule()
   .then(schedule => {
     console.log(schedule)
@@ -283,7 +287,7 @@ Get operational details from bulb
 **Example**  
 ```js
 // get some extra details about the light
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.details()
   .then(details => {
     console.log(details)
@@ -304,7 +308,7 @@ Badly encrypt message in format bulbs use
 
 **Example**  
 ```js
-const encrypted = Bulb.encrypt(Buffer.from('super secret text'))
+const encrypted = TPLSmartDevice.encrypt(Buffer.from('super secret text'))
 ```
 <a name="module_decrypt"></a>
 
@@ -320,7 +324,7 @@ Badly decrypt message from format bulbs use
 
 **Example**  
 ```js
-const decrypted = Bulb.decrypt(encrypted)
+const decrypted = TPLSmartDevice.decrypt(encrypted)
 ```
 
 ## development

@@ -2,7 +2,7 @@ import dgram from 'dgram'
 import EventEmitter from 'events'
 import { Buffer } from 'safe-buffer'
 
-module.exports = class Bulb {
+module.exports = class TPLSmartDevice {
   constructor (ip) {
     this.ip = ip
   }
@@ -15,9 +15,9 @@ module.exports = class Bulb {
    * @example
 ```js
 // turn first discovered light off
-const scan = Bulb.scan()
+const scan = TPLSmartDevice.scan()
   .on('light', light => {
-    light.set(false)
+    light.power(false)
       .then(status => {
         console.log(status)
         scan.stop()
@@ -33,7 +33,7 @@ const scan = Bulb.scan()
     })
     client.bind(9998, undefined, () => {
       client.setBroadcast(true)
-      const msgBuf = Bulb.encrypt(Buffer.from('{"system":{"get_sysinfo":{}}}'))
+      const msgBuf = TPLSmartDevice.encrypt(Buffer.from('{"system":{"get_sysinfo":{}}}'))
       client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
     })
     client.on('message', (msg, rinfo) => {
@@ -45,7 +45,7 @@ const scan = Bulb.scan()
         return
       }
 
-      const light = new Bulb(rinfo.address)
+      const light = new TPLSmartDevice(rinfo.address)
       light._info = rinfo
       light._sysinfo = sysinfo
       light.host = rinfo.address
@@ -60,13 +60,13 @@ const scan = Bulb.scan()
   }
 
   /**
-   * Get info about the Bulb
+   * Get info about the TPLSmartDevice
    * @module info
    * @return {Promise} Resolves to info
    * @example
 ```js
 // get info about a light
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.info()
   .then(info => {
     console.log(info)
@@ -85,7 +85,7 @@ light.info()
    * @return {Promise}    Resolves with answer
    * @example
 ```js
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.send({
   'smartlife.iot.smartbulb.lightingservice': {
     'transition_light_state': {
@@ -119,36 +119,48 @@ light.send({
   }
 
   /**
-   * Change state of lightbulb
-   * @module set
-   * @param {Boolean} power     On or off
+   * Set power-state of lightbulb
+   * @module power
+   * @param {Boolean} powerState On or off
    * @param {Number}  transition Transition to new state in this time
    * @param {Object}  options    Object containing `mode`, `hue`, `saturation`, `color_temp`, `brightness`
    * @returns {Promise}          Resolves to output of command
    * @example
    * ```js
 // turn a light on
-const light = new Bulb('10.0.0.200')
-light.set(true)
+const light = new TPLSmartDevice('10.0.0.200')
+light.power(true)
   .then(status => {
     console.log(status)
   })
   .catch(err => console.error(err))
 ```
    */
-  set (power = true, transition = 0, options = {}) {
-    const msg = {
-      'smartlife.iot.smartbulb.lightingservice': {
-        'transition_light_state': {
-          'ignore_default': 1,
-          'on_off': power ? 1 : 0,
-          'transition_period': transition,
-          ...options
+  power (powerState = true, transition = 0, options = {}) {
+    return this.info()
+      .then(info => {
+        if (typeof info.relay_state !== 'undefined') {
+          return this.send({
+            system: {
+              set_relay_state: {
+                state: powerState ? 1 : 0
+              }
+            }
+          })
+        } else {
+          return this.send({
+            'smartlife.iot.smartbulb.lightingservice': {
+              'transition_light_state': {
+                'ignore_default': 1,
+                'on_off': powerState ? 1 : 0,
+                'transition_period': transition,
+                ...options
+              }
+            }
+          })
+          .then(r => r['smartlife.iot.smartbulb.lightingservice']['transition_light_state'])
         }
-      }
-    }
-    return this.send(msg)
-      .then(r => r['smartlife.iot.smartbulb.lightingservice']['transition_light_state'])
+      })
   }
 
   /**
@@ -160,7 +172,7 @@ light.set(true)
    * @example
 ```js
 // get the light's schedule for 1/2017
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.schedule(1, 2017)
   .then(schedule => {
     console.log(schedule)
@@ -183,7 +195,7 @@ light.schedule(1, 2017)
    * @example
 ```js
 // get the cloud info for the light
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.cloud()
   .then(info => {
     console.log(info)
@@ -203,7 +215,7 @@ light.cloud()
    * @example
 ```js
 // get the bulb's schedule
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.schedule()
   .then(schedule => {
     console.log(schedule)
@@ -223,7 +235,7 @@ light.schedule()
    * @example
 ```js
 // get some extra details about the light
-const light = new Bulb('10.0.0.200')
+const light = new TPLSmartDevice('10.0.0.200')
 light.details()
   .then(details => {
     console.log(details)
@@ -244,7 +256,7 @@ light.details()
    * @return {Buffer}        Encrypted data
    * @example
 ```js
-const encrypted = Bulb.encrypt(Buffer.from('super secret text'))
+const encrypted = TPLSmartDevice.encrypt(Buffer.from('super secret text'))
 ```
    */
   static encrypt (buffer, key = 0xAB) {
@@ -257,7 +269,7 @@ const encrypted = Bulb.encrypt(Buffer.from('super secret text'))
   }
 
   encrypt (buffer, key) {
-    return Bulb.encrypt(buffer, key)
+    return TPLSmartDevice.encrypt(buffer, key)
   }
 
   /**
@@ -268,7 +280,7 @@ const encrypted = Bulb.encrypt(Buffer.from('super secret text'))
    * @return {Buffer}        Decrypted data
    *  @example
 ```js
-const decrypted = Bulb.decrypt(encrypted)
+const decrypted = TPLSmartDevice.decrypt(encrypted)
 ```
    */
   static decrypt (buffer, key = 0xAB) {
@@ -281,6 +293,6 @@ const decrypted = Bulb.decrypt(encrypted)
   }
 
   decrypt (buffer, key) {
-    return Bulb.decrypt(buffer, key)
+    return TPLSmartDevice.decrypt(buffer, key)
   }
 }
