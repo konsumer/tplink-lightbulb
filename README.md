@@ -1,18 +1,18 @@
 <img src="http://s7d1.scene7.com/is/image/officedepot/945143_p_lb120_white_3?$OD-Dynamic$&wid=200&hei=200" align="right" alt="tested with LB120" />
 
 # tplink-lightbulb
-Control TP-Link smart lightbulbs from nodejs
+Control TP-Link smart-home devices from nodejs
 
 [![NPM](https://nodei.co/npm/tplink-lightbulb.png?compact=true)](https://nodei.co/npm/tplink-lightbulb/)
 
-This will allow you to control TP-Link smart lightbulbs from nodejs or the command-line.
+This will allow you to control TP-Link smart-home devices from nodejs or the command-line.
 
 ## supported devices
 
-Not all tp-link smart-home devices can do all things, and we're actively working on the smart-plugs, so here's the support-matrix:
+Not all TP-Link smart-home devices can do all things, and we're actively working on the smart-plugs, so here's the support-matrix:
 
-|       | raw | details | on | off | temp | hex | hsb | cloud |
-|------:|:---:|:-------:|:--:|:---:|:----:|:---:|:---:|:-----:|
+|                                                                         | raw | details | on | off | temp | hex | hsb | cloud |
+|------------------------------------------------------------------------:|:---:|:-------:|:--:|:---:|:----:|:---:|:---:|:-----:|
 | [LB120](http://www.tp-link.com/us/products/details/cat-5609_LB120.html) |  X  |    X    |  X |  X  |   X  |     |     |   X   |
 | [LB130](http://www.tp-link.com/us/products/details/cat-5609_LB130.html) |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |
 | [HS100](http://www.tp-link.com/us/products/details/cat-5516_HS100.html) |  X  |    X    |    |     |      |     |     |       |
