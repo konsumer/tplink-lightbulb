@@ -25,7 +25,7 @@ const scan = TPLSmartDevice.scan()
   })
 ```
    */
-  static scan (filter) {
+  static scan (filter, broadcast = '255.255.255.255') {
     const emitter = new EventEmitter()
     const client = dgram.createSocket({
       type: 'udp4',
@@ -34,7 +34,7 @@ const scan = TPLSmartDevice.scan()
     client.bind(9998, undefined, () => {
       client.setBroadcast(true)
       const msgBuf = TPLSmartDevice.encrypt(Buffer.from('{"system":{"get_sysinfo":{}}}'))
-      client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
+      client.send(msgBuf, 0, msgBuf.length, 9999, broadcast)
     })
     client.on('message', (msg, rinfo) => {
       const decryptedMsg = this.decrypt(msg).toString('ascii')

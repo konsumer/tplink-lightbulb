@@ -35,9 +35,14 @@ export const arg = yargs
       .nargs('filter', 1)
       .describe('filter', 'filter to a specific class of devices (ie: IOT.SMARTBULB)')
 
+      .alias('broadcast', 'b')
+      .nargs('broadcast', 1)
+      .describe('broadcast', 'The network broadcast address for scanning')
+      .default('broadcast', '255.255.255.255')
+
       .example('$0 scan -t 1', 'Get list of TP-Link smart devices on your network, stop after 1 second')
   }, argv => {
-    const scan = TPLSmartDevice.scan(argv.filter)
+    const scan = TPLSmartDevice.scan(argv.filter, argv.broadcast)
       .on('light', light => {
         console.log(`${light._info.address} - ${light._sysinfo.alias} - ${light._sysinfo.model}`)
       })
