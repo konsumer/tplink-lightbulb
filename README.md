@@ -5,7 +5,21 @@ Control TP-Link smart lightbulbs from nodejs
 
 [![NPM](https://nodei.co/npm/tplink-lightbulb.png?compact=true)](https://nodei.co/npm/tplink-lightbulb/)
 
-This will allow you to control TP-Link smart lightbulbs from nodejs or the command-line. I have only tested with [LB120](http://www.tp-link.com/us/products/details/cat-5609_LB120.html) bulbs, and am eager to add support for more, so send a PR, or even just a pcap file of network traffic to add support for your lightbulb.
+This will allow you to control TP-Link smart lightbulbs from nodejs or the command-line.
+
+## supported devices
+
+Not all tp-link smart-home devices can do all things, and we're actively working on the smart-plugs, so here's the support-matrix:
+
+|       | raw | details | on | off | temp | hex | hsb | cloud |
+|------:|:---:|:-------:|:--:|:---:|:----:|:---:|:---:|:-----:|
+| [LB120](http://www.tp-link.com/us/products/details/cat-5609_LB120.html) |  X  |    X    |  X |  X  |   X  |     |     |   X   |
+| [LB130](http://www.tp-link.com/us/products/details/cat-5609_LB130.html) |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |
+| [HS100](http://www.tp-link.com/us/products/details/cat-5516_HS100.html) |  X  |    X    |    |     |      |     |     |       |
+| [HS105](http://www.tp-link.com/us/products/details/cat-5516_HS105.html) |  X  |    X    |    |     |      |     |     |       |
+| [HS110](http://www.tp-link.com/us/products/details/cat-5516_HS110.html) |  X  |    X    |    |     |      |     |     |       |
+| [KP100](http://www.tp-link.com/us/products/details/cat-5516_KP100.html) |  X  |    X    |    |     |      |     |     |       |
+
 
 ## command-line
 
