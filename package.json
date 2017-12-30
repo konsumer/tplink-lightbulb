@@ -1,7 +1,7 @@
 {
   "name": "tplink-lightbulb",
   "version": "1.2.6",
-  "description": "Control TP-Link smart lightbulbs from nodejs",
+  "description": "Control TP-Link smart-home devices from nodejs",
   "main": "build/lib.js",
   "scripts": {
     "release": "npm version patch -m 'Bumped to %s.' && npm publish",
@@ -33,7 +33,13 @@
     "tp-link",
     "lightbulb",
     "smartbulb",
-    "LB120"
+    "smart-home",
+    "LB120",
+    "LB130",
+    "HS100",
+    "HS105",
+    "HS110",
+    "KP100"
   ],
   "dependencies": {
     "colorsys": "^1.0.19",
