@@ -146,7 +146,8 @@ Scan for lightbulbs on your network
 
 | Param | Type | Description |
 | --- | --- | --- |
-| filter | <code>string</code> | Only return devices with this class, (ie 'IOT.SMARTBULB') |
+| filter | <code>string</code> | [none] Only return devices with this class, (ie 'IOT.SMARTBULB') |
+| broadcast | <code>string</code> | ['255.255.255.255'] Use this broadcast IP |
 
 **Example**  
 ```js
@@ -326,6 +327,7 @@ Badly decrypt message from format bulbs use
 ```js
 const decrypted = TPLSmartDevice.decrypt(encrypted)
 ```
+
 
 ## development
 

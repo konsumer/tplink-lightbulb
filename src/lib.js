@@ -10,7 +10,8 @@ module.exports = class TPLSmartDevice {
   /**
    * Scan for lightbulbs on your network
    * @module scan
-   * @param {string} filter Only return devices with this class, (ie 'IOT.SMARTBULB')
+   * @param {string} filter  [none] Only return devices with this class, (ie 'IOT.SMARTBULB')
+   * @param {string} broadcast ['255.255.255.255'] Use this broadcast IP
    * @return {EventEmitter} Emit `light` events when lightbulbs are found
    * @example
 ```js
