@@ -21,6 +21,8 @@ Not all TP-Link smart-home devices can do all things, here's the support-matrix:
 | [HS110](http://www.tp-link.com/us/products/details/cat-5516_HS110.html) |  X  |    X    |  X |  X  |      |     |     |       |
 | [HS200](http://www.tp-link.com/us/products/details/cat-5622_HS200.html) |  X  |    X    |  X |  X  |      |     |     |       |
 | [KP100](http://www.tp-link.com/us/products/details/cat-5516_KP100.html) |  X  |    X    |  X |  X  |      |     |     |       |
+| [LB200](http://www.tp-link.com/us/products/details/cat-5609_LB200.html) |     |         |    |     |      |     |     |       |
+| [LB230](http://www.tp-link.com/us/products/details/cat-5609_LB230.html) |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |
 
 I have LB120, LB130, and HS105, so any testing (and packet-capture) with other devices would be greatly appreciated. 
 
