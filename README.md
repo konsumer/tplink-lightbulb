@@ -1,4 +1,4 @@
-<img src="https://static.tp-link.com/LB120%EF%BC%88US%EF%BC%8910-01_1517973386510T.jpg" align="right" alt="tested with LB120" />
+<img src="https://officedepot.scene7.com/is/image/officedepot/945143_p_lb120_pkg?$OD%2DLarge$&wid=450&hei=450" align="right" alt="tested with LB120" />
 
 # tplink-lightbulb
 
