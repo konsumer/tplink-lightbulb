@@ -8,6 +8,8 @@ Control TP-Link smart-home devices from nodejs
 
 This will allow you to control TP-Link smart-home devices from nodejs or the command-line.
 
+If you want to use kasa (allows you to hit your tplink devices, remotely) hava a look at [kasa_control](https://github.com/konsumer/kasa_control).
+
 ## supported devices
 
 Not all TP-Link smart-home devices can do all things, here's the support-matrix:
