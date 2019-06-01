@@ -7,6 +7,11 @@ import jc from 'json-colorizer'
 
 const json = process.stdout.isTTY ? s => console.log(jc(JSON.stringify(s, null, 2))) : s => console.log(JSON.stringify(s, null, 2))
 
+// for pkg support
+if (typeof process.pkg !== 'undefined') {
+  process.pkg.defaultEntrypoint = 'tplight'
+}
+
 export const arg = yargs
   .usage('Usage: $0 <COMMAND>')
   .help('h')
@@ -73,7 +78,7 @@ export const arg = yargs
       .example('$0 on -t 10000 10.0.0.200', 'Take 10 seconds to turn on a light')
   }, argv => {
     const bulb = new TPLSmartDevice(argv.ip)
-    bulb.power(true, argv.transition, {brightness: argv.brightness})
+    bulb.power(true, argv.transition, { brightness: argv.brightness })
       .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
@@ -113,7 +118,7 @@ export const arg = yargs
       .example('$0 temp 10.0.0.200 10000', 'Set color-temp to bluish')
   }, argv => {
     const bulb = new TPLSmartDevice(argv.ip)
-    bulb.power(true, argv.transition, {hue: 0, saturation: 0, color_temp: argv.color})
+    bulb.power(true, argv.transition, { hue: 0, saturation: 0, color_temp: argv.color })
       .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
@@ -134,7 +139,7 @@ export const arg = yargs
   }, argv => {
     const color = hexToHsl(argv.color)
     const bulb = new TPLSmartDevice(argv.ip)
-    bulb.power(true, argv.transition, {hue: color.h, saturation: color.s, brightness: color.l, color_temp: 0})
+    bulb.power(true, argv.transition, { hue: color.h, saturation: color.s, brightness: color.l, color_temp: 0 })
       .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
@@ -153,9 +158,9 @@ export const arg = yargs
       .example('$0 hsb 10.0.0.200 72 58 35', 'Set the lightbulb to a nice shade of purple.')
       .example('$0 hsb -t 10000 10.0.0.200 72 58 35', 'Take 10 seconds to set the lightbulb to a nice shade of purple.')
   }, argv => {
-    const {transition, hue, saturation, brightness} = argv
+    const { transition, hue, saturation, brightness } = argv
     const bulb = new TPLSmartDevice(argv.ip)
-    bulb.power(true, transition, {color_temp: 0, hue, saturation, brightness})
+    bulb.power(true, transition, { color_temp: 0, hue, saturation, brightness })
       .then(r => argv.quiet || json(r))
       .catch(console.error)
   })
@@ -180,10 +185,10 @@ export const arg = yargs
       bulb.details(),
       bulb.info()
     ])
-    .then(([info, details]) => {
-      json({...details, ...info})
-    })
-    .catch(console.error)
+      .then(([info, details]) => {
+        json({ ...details, ...info })
+      })
+      .catch(console.error)
   })
 
   .argv

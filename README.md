@@ -31,11 +31,13 @@ I have LB120, LB130, and HS105, so any testing (and packet-capture) with other d
 
 ## command-line
 
-You can install it for your system with this:
+If you have nodejs installed, you can install it for your system with this:
 
 ```
 npm i -g tplink-lightbulb
 ```
+
+If you don't want to install nodejs, or just want the standalone-version, install a [release](https://github.com/konsumer/tplink-lightbulb/releases) for your system.
 
 Now, you can use it like this:
 

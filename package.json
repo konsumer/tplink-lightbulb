@@ -4,11 +4,12 @@
   "description": "Control TP-Link smart-home devices from nodejs",
   "main": "build/lib.js",
   "scripts": {
-    "release": "npm version patch -m 'Bumped to %s.' && npm publish",
+    "release": "node release.js",
     "postversion": "git push && git push --tags",
     "build": "babel src/lib.js > build/lib.js && babel src/cli.js > build/cli.js",
     "doc": "jsdoc2md src/lib.js",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "prerelease": "npm run build"
   },
   "bin": {
     "tplight": "build/cli.js"
@@ -24,10 +25,14 @@
   },
   "homepage": "https://github.com/konsumer/tplink-lightbulb#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-latest": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "jsdoc-to-markdown": "^3.0.3"
+    "@babel/cli": "latest",
+    "@babel/core": "latest",
+    "@babel/preset-env": "latest",
+    "archiver-promise": "latest",
+    "jsdoc-to-markdown": "latest",
+    "pkg": "latest",
+    "promise-serial": "^0.1.5",
+    "rimraf": "latest"
   },
   "keywords": [
     "tp-link",
@@ -42,15 +47,14 @@
     "KP100"
   ],
   "dependencies": {
-    "colorsys": "^1.0.19",
-    "json-colorizer": "^1.1.0",
-    "safe-buffer": "^5.1.1",
-    "yargs": "^10.0.3"
+    "colorsys": "latest",
+    "json-colorizer": "latest",
+    "safe-buffer": "latest",
+    "yargs": "latest"
   },
   "babel": {
     "presets": [
-      "latest",
-      "stage-2"
+      "@babel/env"
     ]
   }
 }
