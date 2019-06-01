@@ -11,13 +11,14 @@ const pkg = async target => {
   await archive.finalize()
 }
 
-// for some reason a Promise.all & [].reduce to serialize them kept hanging here, will investigate later
 const run = async () => {
   rimraf(`${__dirname}/release`)
   try {
     mkdirSync(`${__dirname}/release`)
   } catch (e) {}
   process.chdir(`${__dirname}/release`)
+
+  // for some reason a Promise.all & [].reduce to serialize them kept hanging here, will investigate later
 
   let target
   target = 'win-x64'
