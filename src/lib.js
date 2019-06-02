@@ -75,7 +75,7 @@ light.info()
 ```
    */
   info () {
-    return this.send({system: {get_sysinfo: {}}})
+    return this.send({ system: { get_sysinfo: {} } })
       .then(info => info.system.get_sysinfo)
   }
 
@@ -159,7 +159,7 @@ light.power(true)
               }
             }
           })
-          .then(r => r['smartlife.iot.smartbulb.lightingservice']['transition_light_state'])
+            .then(r => r['smartlife.iot.smartbulb.lightingservice']['transition_light_state'])
         }
       })
   }
@@ -185,7 +185,7 @@ light.schedule(1, 2017)
     const now = new Date()
     month = month || now.getMonth() + 1
     year = year || now.getFullYear()
-    return this.send({'smartlife.iot.common.schedule': {'get_daystat': {'month': month, 'year': year}}})
+    return this.send({ 'smartlife.iot.common.schedule': { 'get_daystat': { 'month': month, 'year': year } } })
       .then(r => r['smartlife.iot.common.schedule']['get_daystat'])
   }
 
@@ -205,7 +205,7 @@ light.cloud()
 ```
    */
   cloud () {
-    return this.send({'smartlife.iot.common.cloud': {'get_info': {}}})
+    return this.send({ 'smartlife.iot.common.cloud': { 'get_info': {} } })
       .then(r => r['smartlife.iot.common.cloud']['get_info'])
   }
 
@@ -225,7 +225,7 @@ light.schedule()
 ```
    */
   schedule () {
-    return this.send({'smartlife.iot.common.schedule': {'get_rules': {}}})
+    return this.send({ 'smartlife.iot.common.schedule': { 'get_rules': {} } })
       .then(r => r['smartlife.iot.common.schedule']['get_rules'])
   }
 
@@ -245,8 +245,27 @@ light.details()
 ```
    */
   details () {
-    return this.send({'smartlife.iot.smartbulb.lightingservice': {'get_light_details': {}}})
-      .then(r => r['smartlife.iot.smartbulb.lightingservice']['get_light_details'])
+    return this.send({ 'smartlife.iot.smartbulb.lightingservice': { 'get_light_details': {} } })
+      .then(r => r)
+  }
+
+  /**
+   * Reboot the device
+   * @module reboot
+   * @returns {Promise} Resolves to output of command
+   * @example
+```js
+// get some extra details about the light
+const light = new TPLSmartDevice('10.0.0.200')
+light.reboot()
+  .then(status => {
+    console.log(status)
+  })
+  .catch(e => console.error(e))
+```
+   */
+  reboot () {
+    return this.send({ 'smartlife.iot.common.system': { 'reboot': { 'delay': 1 } } })
   }
 
   /**
