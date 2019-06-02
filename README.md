@@ -4,7 +4,7 @@
 
 Control TP-Link smart-home devices from nodejs
 
-[![NPM](https://nodei.co/npm/tplink-lightbulb.png?compact=true)](https://nodei.co/npm/tplink-lightbulb/)
+[![NPM](https://badge.fury.io/js/tplink-lightbulb.svg)](https://nodei.co/npm/tplink-lightbulb/)
 
 This will allow you to control TP-Link smart-home devices from nodejs or the command-line.
 
