@@ -185,7 +185,7 @@ export const arg = yargs
       bulb.details(),
       bulb.info()
     ])
-      .then(([info, details]) => {
+      .then(([details, info]) => {
         json({ ...details, ...info })
       })
       .catch(console.error)
