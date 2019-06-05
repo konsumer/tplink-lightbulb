@@ -29,6 +29,7 @@ Not all TP-Link smart-home devices can do all things, here's the support-matrix:
 | [KP100](http://www.tp-link.com/us/products/details/cat-5516_KP100.html) |  X  |    X    |  X |  X  |      |     |     |       |
 | [LB200](http://www.tp-link.com/us/products/details/cat-5609_LB200.html) |  X  |    X    |  X |  X  |   X  |     |     |   X   |
 | [LB230](http://www.tp-link.com/us/products/details/cat-5609_LB230.html) |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |
+| [KL110](https://www.tp-link.com/uk/home-networking/smart-bulb/kl110/)   |  X  |    X    |  X |  X  |      |     |     |
 
 I have LB120, LB130, and HS105, so any testing (and packet-capture) with other devices would be greatly appreciated. 
 
