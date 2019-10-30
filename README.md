@@ -12,7 +12,7 @@ This will allow you to control TP-Link smart-home devices from nodejs or the com
 
 * If you want to use kasa (allows you to hit your tplink devices, on an external network) have a look at [kasa_control](https://github.com/konsumer/kasa_control).
 * If you'd like to run a GraphQL server to control your lights, see [tplink-graphql](https://github.com/konsumer/tplink-graphql).
-* If you like to see a demo web-app that uses websockets, see [tpserver](https://github.com/konsumer/tpserver).
+* If you like to see a demo web-app that uses react & websockets, see [tpserver](https://github.com/konsumer/tpserver).
 
 ## supported devices
 
