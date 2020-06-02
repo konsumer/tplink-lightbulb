@@ -31,7 +31,7 @@ Not all TP-Link smart-home devices can do all things, here's the support-matrix:
 | [LB200](http://www.tp-link.com/us/products/details/cat-5609_LB200.html) |  X  |    X    |  X |  X  |   X  |     |     |   X   |
 | [LB230](http://www.tp-link.com/us/products/details/cat-5609_LB230.html) |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |
 | [KL110](https://www.tp-link.com/uk/home-networking/smart-bulb/kl110/)   |  X  |    X    |  X |  X  |      |     |     |
-| [KL130](https://www.kasasmart.com/us/products/smart-lighting/kasa-smart-wi-fi-light-bulb-multicolor-kl130/)   |  X  |    X    |  X |  X  |   X  |     |  X  |
+| [KL130](https://www.kasasmart.com/us/products/smart-lighting/kasa-smart-wi-fi-light-bulb-multicolor-kl130/)   |  X  |    X    |  X |  X  |   X  |     |     | X  |
 
 I have LB120, LB130, and HS105, so any testing (and packet-capture) with other devices would be greatly appreciated. 
 
