@@ -208,7 +208,7 @@ light.send({
       'on_off': 1,
       'transition_period': 0
     }
-})
+}})
 .then(response => {
   console.log(response)
 })
