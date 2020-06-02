@@ -93,7 +93,7 @@ light.send({
       'on_off': 1,
       'transition_period': 0
     }
-})
+}})
 .then(response => {
   console.log(response)
 })
@@ -151,15 +151,15 @@ light.power(true)
         } else {
           return this.send({
             'smartlife.iot.smartbulb.lightingservice': {
-              'transition_light_state': {
-                'ignore_default': 1,
-                'on_off': powerState ? 1 : 0,
-                'transition_period': transition,
+              transition_light_state: {
+                ignore_default: 1,
+                on_off: powerState ? 1 : 0,
+                transition_period: transition,
                 ...options
               }
             }
           })
-            .then(r => r['smartlife.iot.smartbulb.lightingservice']['transition_light_state'])
+            .then(r => r['smartlife.iot.smartbulb.lightingservice'].transition_light_state)
         }
       })
   }
@@ -185,8 +185,8 @@ light.schedule(1, 2017)
     const now = new Date()
     month = month || now.getMonth() + 1
     year = year || now.getFullYear()
-    return this.send({ 'smartlife.iot.common.schedule': { 'get_daystat': { 'month': month, 'year': year } } })
-      .then(r => r['smartlife.iot.common.schedule']['get_daystat'])
+    return this.send({ 'smartlife.iot.common.schedule': { get_daystat: { month: month, year: year } } })
+      .then(r => r['smartlife.iot.common.schedule'].get_daystat)
   }
 
   /**
@@ -205,8 +205,8 @@ light.cloud()
 ```
    */
   cloud () {
-    return this.send({ 'smartlife.iot.common.cloud': { 'get_info': {} } })
-      .then(r => r['smartlife.iot.common.cloud']['get_info'])
+    return this.send({ 'smartlife.iot.common.cloud': { get_info: {} } })
+      .then(r => r['smartlife.iot.common.cloud'].get_info)
   }
 
   /**
@@ -225,8 +225,8 @@ light.schedule()
 ```
    */
   schedule () {
-    return this.send({ 'smartlife.iot.common.schedule': { 'get_rules': {} } })
-      .then(r => r['smartlife.iot.common.schedule']['get_rules'])
+    return this.send({ 'smartlife.iot.common.schedule': { get_rules: {} } })
+      .then(r => r['smartlife.iot.common.schedule'].get_rules)
   }
 
   /**
@@ -245,7 +245,7 @@ light.details()
 ```
    */
   details () {
-    return this.send({ 'smartlife.iot.smartbulb.lightingservice': { 'get_light_details': {} } })
+    return this.send({ 'smartlife.iot.smartbulb.lightingservice': { get_light_details: {} } })
       .then(r => r)
   }
 
@@ -265,7 +265,7 @@ light.reboot()
 ```
    */
   reboot () {
-    return this.send({ 'smartlife.iot.common.system': { 'reboot': { 'delay': 1 } } })
+    return this.send({ 'smartlife.iot.common.system': { reboot: { delay: 1 } } })
   }
 
   /**

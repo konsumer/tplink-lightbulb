@@ -141,6 +141,9 @@ import TPLSmartDevice from 'tplink-lightbulb'
 <dt><a href="#module_details">details</a> ⇒ <code>Promise</code></dt>
 <dd><p>Get operational details from bulb</p>
 </dd>
+<dt><a href="#module_reboot">reboot</a> ⇒ <code>Promise</code></dt>
+<dd><p>Reboot the device</p>
+</dd>
 <dt><a href="#module_encrypt">encrypt</a> ⇒ <code>Buffer</code></dt>
 <dd><p>Badly encrypt message in format bulbs use</p>
 </dd>
@@ -208,7 +211,7 @@ light.send({
       'on_off': 1,
       'transition_period': 0
     }
-})
+}})
 .then(response => {
   console.log(response)
 })
@@ -307,6 +310,22 @@ light.details()
   })
   .catch(e => console.error(e))
 ```
+<a name="module_reboot"></a>
+
+## reboot ⇒ <code>Promise</code>
+Reboot the device
+
+**Returns**: <code>Promise</code> - Resolves to output of command  
+**Example**  
+```js
+// get some extra details about the light
+const light = new TPLSmartDevice('10.0.0.200')
+light.reboot()
+  .then(status => {
+    console.log(status)
+  })
+  .catch(e => console.error(e))
+```
 <a name="module_encrypt"></a>
 
 ## encrypt ⇒ <code>Buffer</code>
@@ -339,16 +358,3 @@ Badly decrypt message from format bulbs use
 ```js
 const decrypted = TPLSmartDevice.decrypt(encrypted)
 ```
-
-
-## development
-
-I use [standard](https://standardjs.com/). You can auto-format your code with `standard --fix` and there's plugins for lots of editors.
-
-## sound
-
-Kyle Dixon made [a cool beat-match script](https://github.com/konsumer/tplink-lightbulb/wiki/Beatmatch) for syncing lights to music.
-
-## thanks
-
-Thanks to [hs100-api](https://github.com/plasticrake/hs100-api) to for some good ideas, and [tplink-smartplug](https://github.com/softScheck/tplink-smartplug) for a good start to a wireshark dissector and some good ideas. @DaveGut really helped with bulb-hacking and research on LB130's.
