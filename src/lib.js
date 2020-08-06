@@ -162,7 +162,8 @@ light.power(true)
             .then(r => r['smartlife.iot.smartbulb.lightingservice'].transition_light_state)
         }
       })
-  } 
+  }
+
   /**
      * Set led-state of lightbulb
      * @module led
@@ -170,23 +171,19 @@ light.power(true)
      * @returns {Promise}          Resolves to output of command
      * @example
      * ```js
-    // turn the LED status light on
-    const light = new TPLSmartDevice('10.0.0.200')
-    light.led(true)
-    .then(status => {
-      console.log(status)
-    })
-    .catch(err => console.error(err))
-    ```
-     */
+// turn the LED status light on
+const light = new TPLSmartDevice('10.0.0.200')
+light.led(true)
+.then(status => {
+  console.log(status)
+})
+.catch(err => console.error(err))
+```
+   */
+  led (ledState = true) {
+    return this.send({ system: { set_led_off: { off: ledState ? 0 : 1 } } })
+  }
 
-  }, {
-    key: "led",
-    value: function led (ledState = true) {
-      return this.send({
-        system: { set_led_off: { off: ledState ? 0 : 1 }}
-      })
-    }
   /**
    * Get schedule info
    * @module daystat
