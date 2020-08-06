@@ -28,6 +28,7 @@ export const arg = yargs
   .example('$0 cloud -h', 'Get more detailed help with `cloud` command')
   .example('$0 raw -h', 'Get more detailed help with `raw` command')
   .example('$0 details -h', 'Get more detailed help with `details` command')
+  .example('$0 led -h', 'Get more detailed help with `led` command')
 
   .command('scan', 'Scan for lightbulbs', yarg => {
     yarg
@@ -189,6 +190,16 @@ export const arg = yargs
         json({ ...details, ...info })
       })
       .catch(console.error)
+  })
+
+  .command('led <ip> <ledState>', 'Turn on/off LED indicator', yarg => {
+    yarg
+      .example('$0 led 10.0.0.200 off', 'Turn off the LED')
+      .example('$0 led 10.0.0.200 on', 'Turn on the LED')
+  }, argv => {
+    const bulb = new TPLSmartDevice(argv.ip)
+    const ledState = ['y', 'yes', 'true', '1', 'on'].indexOf(argv.ledState.toLowerCase()) === -1
+    bulb.led(ledState)
   })
 
   .argv
