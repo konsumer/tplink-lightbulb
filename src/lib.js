@@ -165,6 +165,26 @@ light.power(true)
   }
 
   /**
+     * Set led-state of lightbulb
+     * @module led
+     * @param {Boolean} ledState On or off
+     * @returns {Promise}          Resolves to output of command
+     * @example
+     * ```js
+// turn the LED status light on
+const light = new TPLSmartDevice('10.0.0.200')
+light.led(true)
+.then(status => {
+  console.log(status)
+})
+.catch(err => console.error(err))
+```
+   */
+  led (ledState = true) {
+    return this.send({ system: { set_led_off: { off: ledState ? 0 : 1 } } })
+  }
+
+  /**
    * Get schedule info
    * @module daystat
    * @param  {Number} month Month to check: 1-12

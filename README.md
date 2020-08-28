@@ -130,6 +130,9 @@ import TPLSmartDevice from 'tplink-lightbulb'
 <dt><a href="#module_power">power</a> ⇒ <code>Promise</code></dt>
 <dd><p>Set power-state of lightbulb</p>
 </dd>
+<dt><a href="#module_led">led</a> ⇒ <code>Promise</code></dt>
+<dd><p>Set led-state of lightbulb</p>
+</dd>
 <dt><a href="#module_daystat">daystat</a> ⇒ <code>Promise</code></dt>
 <dd><p>Get schedule info</p>
 </dd>
@@ -240,6 +243,27 @@ light.power(true)
     console.log(status)
   })
   .catch(err => console.error(err))
+```
+<a name="module_led"></a>
+
+## led ⇒ <code>Promise</code>
+Set led-state of lightbulb
+
+**Returns**: <code>Promise</code> - Resolves to output of command  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ledState | <code>Boolean</code> | On or off |
+
+**Example**  
+```js
+// turn the LED status light on
+const light = new TPLSmartDevice('10.0.0.200')
+light.led(true)
+.then(status => {
+  console.log(status)
+})
+.catch(err => console.error(err))
 ```
 <a name="module_daystat"></a>
 
