@@ -187,7 +187,7 @@ light.led(true)
   /**
    * Set the name of lightbulb
    * @module name
-   * @param {String} name On or off
+   * @param {String} newAlias 
    * @returns {Promise}          Resolves to output of command
    * @example
    * ```js
@@ -201,12 +201,12 @@ console.log(status)
 ```
   */
 
-name(name) {
+name(newAlias) {
   return this.info()
   .then(info => {
     return typeof info.dev_name !== 'undefined'
-      ? this.send({ system: { set_dev_alias: {alias: name} } })
-      : this.send({ 'smartlife.iot.common.system': { set_dev_alias: {alias: name} } })
+      ? this.send({ system: { set_dev_alias: {alias: newAlias} } })
+      : this.send({ 'smartlife.iot.common.system': { set_dev_alias: {alias: newAlias} } })
   })
 }
   /**
