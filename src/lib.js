@@ -185,6 +185,31 @@ light.led(true)
   }
 
   /**
+   * Set the name of lightbulb
+   * @module name
+   * @param {String} newAlias 
+   * @returns {Promise}          Resolves to output of command
+   * @example
+   * ```js
+// change the name of a light
+const light = new TPLSmartDevice('10.0.0.200')
+light.name("New Name")
+.then(status => {
+console.log(status)
+})
+.catch(err => console.error(err))
+```
+  */
+
+name(newAlias) {
+  return this.info()
+  .then(info => {
+    return typeof info.dev_name !== 'undefined'
+      ? this.send({ system: { set_dev_alias: {alias: newAlias} } })
+      : this.send({ 'smartlife.iot.common.system': { set_dev_alias: {alias: newAlias} } })
+  })
+}
+  /**
    * Get schedule info
    * @module daystat
    * @param  {Number} month Month to check: 1-12
