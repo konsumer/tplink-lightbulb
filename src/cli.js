@@ -104,6 +104,26 @@ export const arg = yargs
       .catch(console.error)
   })
 
+  .command('bright <ip> <brightness>', 'Set the brightness of the lightbulb (for those that support it)', yarg => {
+    yarg
+      .boolean('quiet')
+      .describe('quiet', "Don't output return value of command")
+      .alias('quiet', 'q')
+
+      .alias('transition', 't')
+      .nargs('transition', 1)
+      .default('transition', 0)
+      .describe('t', 'Transition time (in ms)')
+
+      .example('$0 bright 10.0.0.200 1', 'Set brightness to very low')
+      .example('$0 bright 10.0.0.200 100', 'Set brightness to max')
+  }, argv => {
+    const bulb = new TPLSmartDevice(argv.ip)
+    bulb.power(true, argv.transition, { brightness: argv.brightness })
+      .then(r => argv.quiet || json(r))
+      .catch(console.error)
+  })
+
   .command('temp <ip> <color>', 'Set the color-temperature of the lightbulb (for those that support it)', yarg => {
     yarg
       .boolean('quiet')
