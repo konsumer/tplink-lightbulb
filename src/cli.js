@@ -12,6 +12,11 @@ if (typeof process.pkg !== 'undefined') {
   process.pkg.defaultEntrypoint = 'tplight'
 }
 
+function handleError(err){
+  console.error(err)
+  process.exit(1)
+}
+
 export const arg = yargs
   .usage('Usage: $0 <COMMAND>')
   .help('h')
@@ -81,7 +86,7 @@ export const arg = yargs
     const bulb = new TPLSmartDevice(argv.ip)
     bulb.power(true, argv.transition, { brightness: argv.brightness })
       .then(r => argv.quiet || json(r))
-      .catch(console.error)
+      .catch(handleError)
   })
 
   .command('off <ip>', 'Turn off lightbulb', yarg => {
@@ -101,7 +106,7 @@ export const arg = yargs
     const bulb = new TPLSmartDevice(argv.ip)
     bulb.power(false, argv.transition)
       .then(r => argv.quiet || json(r))
-      .catch(console.error)
+      .catch(handleError)
   })
 
   .command('bright <ip> <brightness>', 'Set the brightness of the lightbulb (for those that support it)', yarg => {
@@ -121,7 +126,7 @@ export const arg = yargs
     const bulb = new TPLSmartDevice(argv.ip)
     bulb.power(true, argv.transition, { brightness: argv.brightness })
       .then(r => argv.quiet || json(r))
-      .catch(console.error)
+      .catch(handleError)
   })
 
   .command('temp <ip> <color>', 'Set the color-temperature of the lightbulb (for those that support it)', yarg => {
@@ -141,7 +146,7 @@ export const arg = yargs
     const bulb = new TPLSmartDevice(argv.ip)
     bulb.power(true, argv.transition, { hue: 0, saturation: 0, color_temp: argv.color })
       .then(r => argv.quiet || json(r))
-      .catch(console.error)
+      .catch(handleError)
   })
 
   .command('hex <ip> <color>', 'Set color of lightbulb using hex color (for those that support it)', yarg => {
@@ -162,7 +167,7 @@ export const arg = yargs
     const bulb = new TPLSmartDevice(argv.ip)
     bulb.power(true, argv.transition, { hue: color.h, saturation: color.s, brightness: color.l, color_temp: 0 })
       .then(r => argv.quiet || json(r))
-      .catch(console.error)
+      .catch(handleError)
   })
 
   .command('hsb <ip> <hue> <saturation> <brightness>', 'Set color of lightbulb using HSB color (for those that support it)', yarg => {
@@ -183,21 +188,21 @@ export const arg = yargs
     const bulb = new TPLSmartDevice(argv.ip)
     bulb.power(true, transition, { color_temp: 0, hue, saturation, brightness })
       .then(r => argv.quiet || json(r))
-      .catch(console.error)
+      .catch(handleError)
   })
 
   .command('cloud <ip>', 'Get cloud info', {}, argv => {
     const bulb = new TPLSmartDevice(argv.ip)
     bulb.cloud()
       .then(r => json(r))
-      .catch(console.error)
+      .catch(handleError)
   })
 
   .command('raw <ip> <json>', 'Send a raw JSON command', {}, argv => {
     const bulb = new TPLSmartDevice(argv.ip)
     bulb.send(JSON.parse(argv.json))
       .then(r => argv.quiet || json(r))
-      .catch(console.error)
+      .catch(handleError)
   })
 
   .command('details <ip>', 'Get details about the device', {}, argv => {
@@ -209,7 +214,7 @@ export const arg = yargs
       .then(([details, info]) => {
         json({ ...details, ...info })
       })
-      .catch(console.error)
+      .catch(handleError)
   })
 
   .command('led <ip> <ledState>', 'Turn on/off LED indicator', yarg => {
