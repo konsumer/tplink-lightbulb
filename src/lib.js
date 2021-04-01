@@ -61,6 +61,40 @@ const scan = TPLSmartDevice.scan()
   }
 
   /**
+   * Scans the wifi networks in range of the device
+   * @returns {Promise}          Resolves to output of command
+   */
+  listwifi () {
+    return this.send({'smartlife.iot.common.softaponboarding': {
+      'get_scaninfo':{
+        'refresh': 1
+      }
+      }})
+        .then(r => r['smartlife.iot.common.softaponboarding'].get_scaninfo.ap_list)
+  }
+
+  /**
+   * Connects the device to the access point in the parameters
+   * @param ssid {String}
+   * @param psswd {String}
+   * @param keyType {Number}
+   * @param cypherType {Number}
+   * @returns {Promise}          Resolves to output of command
+   */
+  connectwifi(ssid, psswd, keyType, cypherType){
+    return this.send({'smartlife.iot.common.softaponboarding': {
+        'set_stainfo':{
+          'cypher_type': cypherType,
+          'key_type': keyType,
+          'password': psswd,
+          'ssid': ssid
+        }
+      }})
+        .then(r => r['smartlife.iot.common.softaponboarding']).set_stainfo
+  }
+
+
+  /**
    * Get info about the TPLSmartDevice
    * @module info
    * @return {Promise} Resolves to info
