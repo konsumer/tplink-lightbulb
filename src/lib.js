@@ -62,6 +62,7 @@ const scan = TPLSmartDevice.scan()
 
   /**
    * Scans the wifi networks in range of the device
+   * @module listwifi
    * @returns {Promise}          Resolves to output of command
    * @example
 ```js
@@ -87,6 +88,7 @@ light.listwifi()
 
   /**
    * Connects the device to the access point in the parameters
+   * @module connectwifi
    * @param ssid {String}
    * @param psswd {String}
    * @param keyType {Number}

@@ -129,9 +129,21 @@ import TPLSmartDevice from 'tplink-lightbulb'
 
 ## API
 
+
+> tplink-lightbulb@1.6.1 doc
+> jsdoc2md src/lib.js
+
+## Modules
+
 <dl>
 <dt><a href="#module_scan">scan</a> ⇒ <code>EventEmitter</code></dt>
 <dd><p>Scan for lightbulbs on your network</p>
+</dd>
+<dt><a href="#module_listwifi">listwifi</a> ⇒ <code>Promise</code></dt>
+<dd><p>Scans the wifi networks in range of the device</p>
+</dd>
+<dt><a href="#module_connectwifi">connectwifi</a> ⇒ <code>Promise</code></dt>
+<dd><p>Connects the device to the access point in the parameters</p>
 </dd>
 <dt><a href="#module_info">info</a> ⇒ <code>Promise</code></dt>
 <dd><p>Get info about the TPLSmartDevice</p>
@@ -193,6 +205,44 @@ const scan = TPLSmartDevice.scan()
         console.log(status)
         scan.stop()
       })
+  })
+```
+<a name="module_listwifi"></a>
+
+## listwifi ⇒ <code>Promise</code>
+Scans the wifi networks in range of the device
+
+**Returns**: <code>Promise</code> - Resolves to output of command  
+**Example**  
+```js
+// get info about a light
+const light = new TPLSmartDevice('10.0.0.200')
+light.listwifi()
+  .then(info => {
+    console.log(info)
+  })
+```
+<a name="module_connectwifi"></a>
+
+## connectwifi ⇒ <code>Promise</code>
+Connects the device to the access point in the parameters
+
+**Returns**: <code>Promise</code> - Resolves to output of command  
+
+| Param | Type |
+| --- | --- |
+| ssid | <code>String</code> | 
+| psswd | <code>String</code> | 
+| keyType | <code>Number</code> | 
+| cypherType | <code>Number</code> | 
+
+**Example**  
+```js
+// get info about a light
+const light = new TPLSmartDevice('10.0.0.200')
+light.connectwifi("SSID", "PASSWORD", 3, 2)
+  .then(info => {
+    console.log(info)
   })
 ```
 <a name="module_info"></a>
