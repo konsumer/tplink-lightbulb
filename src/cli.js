@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import TPLSmartDevice from './lib'
-import yargs from 'yargs'
-import { hexToHsl } from 'colorsys'
-import jc from 'json-colorizer'
+const TPLSmartDevice = require('./lib')
+const yargs = require('yargs')
+const { hexToHsl } = require('colorsys')
+const jc = require('json-colorizer')
 
 const json = process.stdout.isTTY ? s => console.log(jc(JSON.stringify(s, null, 2))) : s => console.log(JSON.stringify(s, null, 2))
 
@@ -17,7 +17,7 @@ function handleError (err) {
   process.exit(1)
 }
 
-export const arg = yargs
+const arg = yargs
   .usage('Usage: $0 <COMMAND>')
   .help('h')
   .alias('h', 'help')
