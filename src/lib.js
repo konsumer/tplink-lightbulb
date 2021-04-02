@@ -95,7 +95,7 @@ const scan = TPLSmartDevice.scan()
         }
       }
     })
-      .then(r => r['smartlife.iot.common.softaponboarding']).set_stainfo
+      .then(r => r['smartlife.iot.common.softaponboarding'].set_stainfo)
   }
 
   /**

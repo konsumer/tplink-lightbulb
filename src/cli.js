@@ -34,6 +34,7 @@ module.exports = yargs
   .example('$0 raw -h', 'Get more detailed help with `raw` command')
   .example('$0 details -h', 'Get more detailed help with `details` command')
   .example('$0 led -h', 'Get more detailed help with `led` command')
+  .example('$0 wifi -h', 'Get more detailed help with `wifi` command')
 
   .command('scan', 'Scan for lightbulbs', yarg => {
     yarg
@@ -225,6 +226,42 @@ module.exports = yargs
     const bulb = new TPLSmartDevice(argv.ip)
     const ledState = ['y', 'yes', 'true', '1', 'on'].indexOf(argv.ledState.toLowerCase()) === -1
     bulb.led(ledState)
+  })
+
+  .command('wifi <ip>', 'List available wifi for a particular device', yarg => {
+    yarg
+      .example('$0 wifi 10.0.0.200', 'List wifi')
+  }, async argv => {
+    try {
+      const bulb = new TPLSmartDevice(argv.ip)
+      const wifi = await bulb.listwifi()
+      json(wifi)
+    } catch (e) {
+      handleError(e)
+    }
+  })
+
+  .command('join <ip> <SSID> [SECRET]', 'Configure the device to use these wifi settings', yarg => {
+    yarg
+      .example('$0 join 10.0.0.200 "my SSID goes here" "my password goes here"', 'Setup wifi')
+  }, async argv => {
+    try {
+      const bulb = new TPLSmartDevice(argv.ip)
+      const wifi = await bulb.listwifi()
+      const chosen = wifi.find(w => w.ssid === argv.SSID)
+      if (!chosen) {
+        handleError(`${argv.SSID} not found.`)
+      }
+      console.log(argv)
+      const status = await bulb.connectwifi(argv.SSID, argv.SECRET, chosen.key_type)
+      if (status) {
+        console.log(`OK, joined ${argv.SSID}.`)
+      } else {
+        console.log(`Could not join ${argv.SSID}.`)
+      }
+    } catch (e) {
+      handleError(e)
+    }
   })
 
   .argv
