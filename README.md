@@ -129,12 +129,6 @@ import TPLSmartDevice from 'tplink-lightbulb'
 
 ## API
 
-
-> tplink-lightbulb@1.6.1 doc
-> jsdoc2md src/lib.js
-
-## Modules
-
 <dl>
 <dt><a href="#module_scan">scan</a> ⇒ <code>EventEmitter</code></dt>
 <dd><p>Scan for lightbulbs on your network</p>
@@ -215,7 +209,7 @@ Scans the wifi networks in range of the device
 **Returns**: <code>Promise</code> - Resolves to output of command  
 **Example**  
 ```js
-// get info about a light
+// scan for available wifi
 const light = new TPLSmartDevice('10.0.0.200')
 light.listwifi()
   .then(info => {
@@ -238,7 +232,7 @@ Connects the device to the access point in the parameters
 
 **Example**  
 ```js
-// get info about a light
+// command a device to join a wifi network
 const light = new TPLSmartDevice('10.0.0.200')
 light.connectwifi("SSID", "PASSWORD", 3, 2)
   .then(info => {

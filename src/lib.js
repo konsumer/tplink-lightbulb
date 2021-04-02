@@ -66,7 +66,7 @@ const scan = TPLSmartDevice.scan()
    * @returns {Promise}          Resolves to output of command
    * @example
 ```js
-// get info about a light
+// scan for available wifi
 const light = new TPLSmartDevice('10.0.0.200')
 light.listwifi()
   .then(info => {
@@ -96,7 +96,7 @@ light.listwifi()
    * @returns {Promise}          Resolves to output of command
    * @example
 ```js
-// get info about a light
+// command a device to join a wifi network
 const light = new TPLSmartDevice('10.0.0.200')
 light.connectwifi("SSID", "PASSWORD", 3, 2)
   .then(info => {
