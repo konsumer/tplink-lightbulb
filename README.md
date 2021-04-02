@@ -18,21 +18,21 @@ This will allow you to control TP-Link smart-home devices from nodejs or the com
 
 Not all TP-Link smart-home devices can do all things, here's the support-matrix:
 
-|                                                                         | raw | details | on | off | temp | hex | hsb | cloud |
-|------------------------------------------------------------------------:|:---:|:-------:|:--:|:---:|:----:|:---:|:---:|:-----:|
-| [LB100](http://www.tp-link.com/us/products/details/cat-5609_LB100.html) |  X  |    X    |  X |  X  |   X  |     |     |   X   |
-| [LB120](http://www.tp-link.com/us/products/details/cat-5609_LB120.html) |  X  |    X    |  X |  X  |   X  |     |     |   X   |
-| [LB130](http://www.tp-link.com/us/products/details/cat-5609_LB130.html) |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |
-| [HS100](http://www.tp-link.com/us/products/details/cat-5516_HS100.html) |  X  |    X    |  X |  X  |      |     |     |       |
-| [HS105](http://www.tp-link.com/us/products/details/cat-5516_HS105.html) |  X  |    X    |  X |  X  |      |     |     |       |
-| [HS110](http://www.tp-link.com/us/products/details/cat-5516_HS110.html) |  X  |    X    |  X |  X  |      |     |     |       |
-| [HS200](http://www.tp-link.com/us/products/details/cat-5622_HS200.html) |  X  |    X    |  X |  X  |      |     |     |       |
-| [KP100](http://www.tp-link.com/us/products/details/cat-5516_KP100.html) |  X  |    X    |  X |  X  |      |     |     |       |
-| [LB200](http://www.tp-link.com/us/products/details/cat-5609_LB200.html) |  X  |    X    |  X |  X  |   X  |     |     |   X   |
-| [LB230](http://www.tp-link.com/us/products/details/cat-5609_LB230.html) |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |
-| [KL110](https://www.tp-link.com/uk/home-networking/smart-bulb/kl110/)   |  X  |    X    |  X |  X  |      |     |     |       |
-| [KL120](https://www.tp-link.com/uk/home-networking/smart-bulb/kl120/)   |  X  |    X    |  X |  X  |   X  |     |     |   X   |
-| [KL130](https://www.kasasmart.com/us/products/smart-lighting/kasa-smart-wi-fi-light-bulb-multicolor-kl130/)   |  X  |    X    |  X |  X  |   X  |  X  | X   | X  |
+|                                                                                                             | raw | details | on | off | temp | hex | hsb | cloud | wifi | join |
+|------------------------------------------------------------------------------------------------------------:|:---:|:-------:|:--:|:---:|:----:|:---:|:---:|:-----:|:----:|:----:|
+| [LB100](http://www.tp-link.com/us/products/details/cat-5609_LB100.html)                                     |  X  |    X    |  X |  X  |   X  |     |     |   X   |   X  |   X  |
+| [LB120](http://www.tp-link.com/us/products/details/cat-5609_LB120.html)                                     |  X  |    X    |  X |  X  |   X  |     |     |   X   |   X  |   X  |
+| [LB130](http://www.tp-link.com/us/products/details/cat-5609_LB130.html)                                     |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |   X  |   X  |
+| [HS100](http://www.tp-link.com/us/products/details/cat-5516_HS100.html)                                     |  X  |    X    |  X |  X  |      |     |     |       |   X  |   X  |
+| [HS105](http://www.tp-link.com/us/products/details/cat-5516_HS105.html)                                     |  X  |    X    |  X |  X  |      |     |     |       |   X  |   X  |
+| [HS110](http://www.tp-link.com/us/products/details/cat-5516_HS110.html)                                     |  X  |    X    |  X |  X  |      |     |     |       |   X  |   X  |
+| [HS200](http://www.tp-link.com/us/products/details/cat-5622_HS200.html)                                     |  X  |    X    |  X |  X  |      |     |     |       |   X  |   X  |
+| [KP100](http://www.tp-link.com/us/products/details/cat-5516_KP100.html)                                     |  X  |    X    |  X |  X  |      |     |     |       |   X  |   X  |
+| [LB200](http://www.tp-link.com/us/products/details/cat-5609_LB200.html)                                     |  X  |    X    |  X |  X  |   X  |     |     |   X   |   X  |   X  |
+| [LB230](http://www.tp-link.com/us/products/details/cat-5609_LB230.html)                                     |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |   X  |   X  |
+| [KL110](https://www.tp-link.com/uk/home-networking/smart-bulb/kl110/)                                       |  X  |    X    |  X |  X  |      |     |     |       |   X  |   X  |
+| [KL120](https://www.tp-link.com/uk/home-networking/smart-bulb/kl120/)                                       |  X  |    X    |  X |  X  |   X  |     |     |   X   |   X  |   X  |
+| [KL130](https://www.kasasmart.com/us/products/smart-lighting/kasa-smart-wi-fi-light-bulb-multicolor-kl130/) |  X  |    X    |  X |  X  |   X  |  X  |  X  |   X   |   X  |   X  |
 
 I have LB120, LB130, and HS105, so any testing (and packet-capture) with other devices would be greatly appreciated. 
 
