@@ -1,6 +1,6 @@
-import dgram from 'dgram'
-import EventEmitter from 'events'
-import { Buffer } from 'safe-buffer'
+const dgram = require('dgram')
+const EventEmitter = require('events')
+const { Buffer } = require('safe-buffer')
 
 module.exports = class TPLSmartDevice {
   constructor (ip) {
@@ -65,12 +65,15 @@ const scan = TPLSmartDevice.scan()
    * @returns {Promise}          Resolves to output of command
    */
   listwifi () {
-    return this.send({'smartlife.iot.common.softaponboarding': {
-      'get_scaninfo':{
-        'refresh': 1
+    // could also be smartlife.iot.common.softaponboarding, but most seem to support netif
+    return this.send({
+      netif: {
+        get_scaninfo: {
+          refresh: 1
+        }
       }
-      }})
-        .then(r => r['smartlife.iot.common.softaponboarding'].get_scaninfo.ap_list)
+    })
+      .then(r => r.netif.get_scaninfo.ap_list)
   }
 
   /**
@@ -81,18 +84,19 @@ const scan = TPLSmartDevice.scan()
    * @param cypherType {Number}
    * @returns {Promise}          Resolves to output of command
    */
-  connectwifi(ssid, psswd, keyType, cypherType){
-    return this.send({'smartlife.iot.common.softaponboarding': {
-        'set_stainfo':{
-          'cypher_type': cypherType,
-          'key_type': keyType,
-          'password': psswd,
-          'ssid': ssid
+  connectwifi (ssid, psswd, keyType, cypherType) {
+    return this.send({
+      'smartlife.iot.common.softaponboarding': {
+        set_stainfo: {
+          cypher_type: cypherType,
+          key_type: keyType,
+          password: psswd,
+          ssid: ssid
         }
-      }})
-        .then(r => r['smartlife.iot.common.softaponboarding']).set_stainfo
+      }
+    })
+      .then(r => r['smartlife.iot.common.softaponboarding']).set_stainfo
   }
-
 
   /**
    * Get info about the TPLSmartDevice
@@ -221,7 +225,7 @@ light.led(true)
   /**
    * Set the name of lightbulb
    * @module name
-   * @param {String} newAlias 
+   * @param {String} newAlias
    * @returns {Promise}          Resolves to output of command
    * @example
    * ```js
@@ -235,14 +239,15 @@ console.log(status)
 ```
   */
 
-name(newAlias) {
-  return this.info()
-  .then(info => {
-    return typeof info.dev_name !== 'undefined'
-      ? this.send({ system: { set_dev_alias: {alias: newAlias} } })
-      : this.send({ 'smartlife.iot.common.system': { set_dev_alias: {alias: newAlias} } })
-  })
-}
+  name (newAlias) {
+    return this.info()
+      .then(info => {
+        return typeof info.dev_name !== 'undefined'
+          ? this.send({ system: { set_dev_alias: { alias: newAlias } } })
+          : this.send({ 'smartlife.iot.common.system': { set_dev_alias: { alias: newAlias } } })
+      })
+  }
+
   /**
    * Get schedule info
    * @module daystat

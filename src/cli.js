@@ -12,7 +12,7 @@ if (typeof process.pkg !== 'undefined') {
   process.pkg.defaultEntrypoint = 'tplight'
 }
 
-function handleError(err){
+function handleError (err) {
   console.error(err)
   process.exit(1)
 }
