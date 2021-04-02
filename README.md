@@ -53,22 +53,30 @@ Now, you can use it like this:
 Usage: tplight <COMMAND>
 
 Commands:
-  scan                                      Scan for lightbulbs
-  on <ip>                                   Turn on lightbulb
-  off <ip>                                  Turn off lightbulb
-  temp <ip> <color>                         Set the color-temperature of the
+  tplight scan                               Scan for lightbulbs
+  tplight on <ip>                            Turn on lightbulb
+  tplight off <ip>                           Turn off lightbulb
+  tplight bright <ip> <brightness>           Set the brightness of the lightbulb
+                                            (for those that support it)
+  tplight temp <ip> <color>                  Set the color-temperature of the
                                             lightbulb (for those that support
                                             it)
-  hex <ip> <color>                          Set color of lightbulb using hex
+  tplight hex <ip> <color>                   Set color of lightbulb using hex
                                             color (for those that support it)
-  hsb <ip> <hue> <saturation> <brightness>  Set color of lightbulb using HSB
-                                            color (for those that support it)
-  cloud <ip>                                Get cloud info
-  raw <ip> <json>                           Send a raw JSON command
-  details <ip>                              Get details about the device
+  tplight hsb <ip> <hue> <saturation>        Set color of lightbulb using HSB
+  <brightness>                              color (for those that support it)
+  tplight cloud <ip>                         Get cloud info
+  tplight raw <ip> <json>                    Send a raw JSON command
+  tplight details <ip>                       Get details about the device
+  tplight led <ip> <ledState>                Turn on/off LED indicator
+  tplight wifi <ip>                          List available wifi for a particular
+                                            device
+  tplight join <ip> <SSID> [SECRET]          Configure the device to use these
+                                            wifi settings
 
 Options:
-  -h, --help  Show help                                                [boolean]
+  -h, --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
 
 Examples:
   tplight scan -h     Get more detailed help with `scan` command
@@ -80,6 +88,9 @@ Examples:
   tplight cloud -h    Get more detailed help with `cloud` command
   tplight raw -h      Get more detailed help with `raw` command
   tplight details -h  Get more detailed help with `details` command
+  tplight led -h      Get more detailed help with `led` command
+  tplight wifi -h     Get more detailed help with `wifi` command
+  tplight join -h     Get more detailed help with `join` command
 ```
 
 ## wireshark
@@ -133,6 +144,9 @@ import TPLSmartDevice from 'tplink-lightbulb'
 </dd>
 <dt><a href="#module_led">led</a> ⇒ <code>Promise</code></dt>
 <dd><p>Set led-state of lightbulb</p>
+</dd>
+<dt><a href="#module_name">name</a> ⇒ <code>Promise</code></dt>
+<dd><p>Set the name of lightbulb</p>
 </dd>
 <dt><a href="#module_daystat">daystat</a> ⇒ <code>Promise</code></dt>
 <dd><p>Get schedule info</p>
@@ -263,6 +277,27 @@ const light = new TPLSmartDevice('10.0.0.200')
 light.led(true)
 .then(status => {
   console.log(status)
+})
+.catch(err => console.error(err))
+```
+<a name="module_name"></a>
+
+## name ⇒ <code>Promise</code>
+Set the name of lightbulb
+
+**Returns**: <code>Promise</code> - Resolves to output of command  
+
+| Param | Type |
+| --- | --- |
+| newAlias | <code>String</code> | 
+
+**Example**  
+```js
+// change the name of a light
+const light = new TPLSmartDevice('10.0.0.200')
+light.name("New Name")
+.then(status => {
+console.log(status)
 })
 .catch(err => console.error(err))
 ```

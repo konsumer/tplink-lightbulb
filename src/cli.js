@@ -35,6 +35,7 @@ module.exports = yargs
   .example('$0 details -h', 'Get more detailed help with `details` command')
   .example('$0 led -h', 'Get more detailed help with `led` command')
   .example('$0 wifi -h', 'Get more detailed help with `wifi` command')
+  .example('$0 join -h', 'Get more detailed help with `join` command')
 
   .command('scan', 'Scan for lightbulbs', yarg => {
     yarg

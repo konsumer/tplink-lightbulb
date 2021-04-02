@@ -63,6 +63,15 @@ const scan = TPLSmartDevice.scan()
   /**
    * Scans the wifi networks in range of the device
    * @returns {Promise}          Resolves to output of command
+   * @example
+```js
+// get info about a light
+const light = new TPLSmartDevice('10.0.0.200')
+light.listwifi()
+  .then(info => {
+    console.log(info)
+  })
+```
    */
   listwifi () {
     // could also be smartlife.iot.common.softaponboarding, but most seem to support netif
@@ -83,6 +92,15 @@ const scan = TPLSmartDevice.scan()
    * @param keyType {Number}
    * @param cypherType {Number}
    * @returns {Promise}          Resolves to output of command
+   * @example
+```js
+// get info about a light
+const light = new TPLSmartDevice('10.0.0.200')
+light.connectwifi("SSID", "PASSWORD", 3, 2)
+  .then(info => {
+    console.log(info)
+  })
+```
    */
   connectwifi (ssid, psswd, keyType, cypherType) {
     return this.send({
