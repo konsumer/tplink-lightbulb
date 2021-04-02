@@ -17,7 +17,7 @@ function handleError (err) {
   process.exit(1)
 }
 
-const arg = yargs
+module.exports = yargs
   .usage('Usage: $0 <COMMAND>')
   .help('h')
   .alias('h', 'help')
