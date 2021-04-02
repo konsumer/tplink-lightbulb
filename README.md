@@ -223,12 +223,12 @@ Connects the device to the access point in the parameters
 
 **Returns**: <code>Promise</code> - Resolves to output of command  
 
-| Param | Type |
-| --- | --- |
-| ssid | <code>String</code> | 
-| psswd | <code>String</code> | 
-| keyType | <code>Number</code> | 
-| cypherType | <code>Number</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| ssid | <code>String</code> | Your wifi SSID |
+| password | <code>String</code> | Your wifi secret |
+| keyType | <code>Number</code> | The type of key (WPA 2 is 3, no key is 0) |
+| cypherType | <code>Number</code> | The type of cypher (WPA2 is 2) |
 
 **Example**  
 ```js

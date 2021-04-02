@@ -89,10 +89,10 @@ light.listwifi()
   /**
    * Connects the device to the access point in the parameters
    * @module connectwifi
-   * @param ssid {String}
-   * @param psswd {String}
-   * @param keyType {Number}
-   * @param cypherType {Number}
+   * @param ssid {String}      Your wifi SSID
+   * @param password {String}  Your wifi secret
+   * @param keyType {Number}   The type of key (WPA 2 is 3, no key is 0)
+   * @param cypherType {Number} The type of cypher (WPA2 is 2)
    * @returns {Promise}          Resolves to output of command
    * @example
 ```js
@@ -104,14 +104,14 @@ light.connectwifi("SSID", "PASSWORD", 3, 2)
   })
 ```
    */
-  connectwifi (ssid, psswd, keyType, cypherType) {
+  connectwifi (ssid, password, keyType, cypherType) {
     return this.send({
       'smartlife.iot.common.softaponboarding': {
         set_stainfo: {
           cypher_type: cypherType,
           key_type: keyType,
-          password: psswd,
-          ssid: ssid
+          password,
+          ssid
         }
       }
     })
