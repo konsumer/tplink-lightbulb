@@ -5,7 +5,7 @@ const rimraf = require('rimraf').sync
 
 const pkg = async target => {
   console.log(`Building ${target}`)
-  await pkgOrig.exec(`../build/cli.js --target latest-${target} --output ${target}/tplight`.split(' '))
+  await pkgOrig.exec(`../build/cli.js --nodeRange=latest --target latest-${target} --output ${target}/tplight`.split(' '))
   const archive = archiver(`${target}.zip`)
   archive.directory(`${target}`)
   await archive.finalize()
