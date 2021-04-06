@@ -1,14 +1,12 @@
 {
   "name": "tplink-lightbulb",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Control TP-Link smart-home devices from nodejs",
-  
   "source": "src/lib.js",
   "main": "build/tplink-lightbulb.js",
   "exports": "build/tplink-lightbulb.modern.js",
   "module": "build/tplink-lightbulb.module.js",
   "unpkg": "build/tplink-lightbulb.umd.js",
-
   "scripts": {
     "release": "node src/release.js",
     "postversion": "git push && git push --tags",
@@ -16,11 +14,9 @@
     "doc": "jsdoc2md src/lib.js",
     "prepublish": "npm run build"
   },
-  
   "bin": {
     "tplight": "build/cli.js"
   },
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/konsumer/tplink-lightbulb.git"
@@ -31,7 +27,6 @@
     "url": "https://github.com/konsumer/tplink-lightbulb/issues"
   },
   "homepage": "https://github.com/konsumer/tplink-lightbulb#readme",
-  
   "keywords": [
     "tp-link",
     "lightbulb",
@@ -44,7 +39,6 @@
     "HS110",
     "KP100"
   ],
-
   "devDependencies": {
     "archiver-promise": "latest",
     "jsdoc-to-markdown": "latest",
@@ -52,14 +46,12 @@
     "pkg": "latest",
     "rimraf": "latest"
   },
-  
   "dependencies": {
     "colorsys": "latest",
     "json-colorizer": "latest",
     "safe-buffer": "latest",
     "yargs": "latest"
   },
-
   "files": [
     "build/tplink-lightbulb.js",
     "build/ttplink-lightbulb.js.map",
