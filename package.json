@@ -2,18 +2,25 @@
   "name": "tplink-lightbulb",
   "version": "1.6.2",
   "description": "Control TP-Link smart-home devices from nodejs",
-  "main": "build/lib.js",
+  
+  "source": "src/lib.js",
+  "main": "build/tplink-lightbulb.js",
+  "exports": "build/tplink-lightbulb.modern.js",
+  "module": "build/tplink-lightbulb.module.js",
+  "unpkg": "build/tplink-lightbulb.umd.js",
+
   "scripts": {
-    "release": "node release.js",
+    "release": "node src/release.js",
     "postversion": "git push && git push --tags",
-    "build": "babel src/lib.js > build/lib.js && babel src/cli.js > build/cli.js",
+    "build": "microbundle",
     "doc": "jsdoc2md src/lib.js",
-    "prepublish": "npm run build",
-    "prerelease": "npm run build"
+    "prepublish": "npm run build"
   },
+  
   "bin": {
     "tplight": "build/cli.js"
   },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/konsumer/tplink-lightbulb.git"
@@ -24,16 +31,7 @@
     "url": "https://github.com/konsumer/tplink-lightbulb/issues"
   },
   "homepage": "https://github.com/konsumer/tplink-lightbulb#readme",
-  "devDependencies": {
-    "@babel/cli": "latest",
-    "@babel/core": "latest",
-    "@babel/preset-env": "latest",
-    "archiver-promise": "latest",
-    "jsdoc-to-markdown": "latest",
-    "pkg": "latest",
-    "promise-serial": "^0.1.5",
-    "rimraf": "latest"
-  },
+  
   "keywords": [
     "tp-link",
     "lightbulb",
@@ -46,15 +44,30 @@
     "HS110",
     "KP100"
   ],
+
+  "devDependencies": {
+    "archiver-promise": "latest",
+    "jsdoc-to-markdown": "latest",
+    "microbundle": "^0.13.0",
+    "pkg": "latest",
+    "rimraf": "latest"
+  },
+  
   "dependencies": {
     "colorsys": "latest",
     "json-colorizer": "latest",
     "safe-buffer": "latest",
     "yargs": "latest"
   },
-  "babel": {
-    "presets": [
-      "@babel/env"
-    ]
-  }
+
+  "files": [
+    "build/tplink-lightbulb.js",
+    "build/ttplink-lightbulb.js.map",
+    "build/ttplink-lightbulb.modern.js",
+    "build/ttplink-lightbulb.modern.js.map",
+    "build/ttplink-lightbulb.module.js",
+    "build/ttplink-lightbulb.module.js.map",
+    "build/ttplink-lightbulb.umd.js",
+    "build/ttplink-lightbulb.umd.js.map"
+  ]
 }
