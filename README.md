@@ -45,6 +45,12 @@ If you have nodejs installed, you can install it for your system with this:
 npm i -g tplink-lightbulb
 ```
 
+You can even run it without installing:
+
+```
+npx tplink-lightbulb
+```
+
 If you don't want to install nodejs, or just want the standalone-version, install a [release](https://github.com/konsumer/tplink-lightbulb/releases) for your system.
 
 Now, you can use it like this:
