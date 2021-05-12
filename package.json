@@ -3,16 +3,16 @@
   "version": "1.6.3",
   "description": "Control TP-Link smart-home devices from nodejs",
   "source": "src/lib.js",
-  "main": "build/tplink-lightbulb.js",
+  "main": "build/lib.js",
   "exports": "build/tplink-lightbulb.modern.js",
   "module": "build/tplink-lightbulb.module.js",
   "unpkg": "build/tplink-lightbulb.umd.js",
   "scripts": {
     "release": "node src/release.js",
     "postversion": "git push && git push --tags",
-    "build": "microbundle",
-    "doc": "jsdoc2md src/lib.js",
-    "prepublish": "npm run build"
+    "build": "microbundle && microbundle -i src/cli.js -o build/cli.js -f cjs",
+    "doc": "doxdox 'src/lib.js' --layout markdown --output API.md",
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "tplight": "build/cli.js"
@@ -41,8 +41,8 @@
   ],
   "devDependencies": {
     "archiver-promise": "latest",
-    "jsdoc-to-markdown": "latest",
-    "microbundle": "^0.13.0",
+    "doxdox": "latest",
+    "microbundle": "latest",
     "pkg": "latest",
     "rimraf": "latest"
   },

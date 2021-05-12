@@ -14,7 +14,6 @@ module.exports = class TPLSmartDevice {
    * @param {string} broadcast ['255.255.255.255'] Use this broadcast IP
    * @return {EventEmitter} Emit `light` events when lightbulbs are found
    * @example
-```js
 // turn first discovered light off
 const scan = TPLSmartDevice.scan()
   .on('light', light => {
@@ -24,7 +23,6 @@ const scan = TPLSmartDevice.scan()
         scan.stop()
       })
   })
-```
    */
   static scan (filter, broadcast = '255.255.255.255') {
     const emitter = new EventEmitter()
@@ -65,14 +63,12 @@ const scan = TPLSmartDevice.scan()
    * @module listwifi
    * @returns {Promise}          Resolves to output of command
    * @example
-```js
 // scan for available wifi
 const light = new TPLSmartDevice('10.0.0.200')
 light.listwifi()
   .then(info => {
     console.log(info)
   })
-```
    */
   listwifi () {
     // could also be smartlife.iot.common.softaponboarding, but most seem to support netif
@@ -95,14 +91,12 @@ light.listwifi()
    * @param cypherType {Number} The type of cypher (WPA2 is 2)
    * @returns {Promise}          Resolves to output of command
    * @example
-```js
 // command a device to join a wifi network
 const light = new TPLSmartDevice('10.0.0.200')
 light.connectwifi("SSID", "PASSWORD", 3, 2)
   .then(info => {
     console.log(info)
   })
-```
    */
   connectwifi (ssid, password, keyType, cypherType) {
     return this.send({
@@ -123,14 +117,12 @@ light.connectwifi("SSID", "PASSWORD", 3, 2)
    * @module info
    * @return {Promise} Resolves to info
    * @example
-```js
 // get info about a light
 const light = new TPLSmartDevice('10.0.0.200')
 light.info()
   .then(info => {
     console.log(info)
   })
-```
    */
   info () {
     return this.send({ system: { get_sysinfo: {} } })
@@ -143,7 +135,6 @@ light.info()
    * @param  {Object} msg Message to send to bulb
    * @return {Promise}    Resolves with answer
    * @example
-```js
 const light = new TPLSmartDevice('10.0.0.200')
 light.send({
   'smartlife.iot.smartbulb.lightingservice': {
@@ -156,7 +147,6 @@ light.send({
   console.log(response)
 })
 .catch(e => console.error(e))
-```
    */
   send (msg) {
     return new Promise((resolve, reject) => {
@@ -185,7 +175,6 @@ light.send({
    * @param {Object}  options    Object containing `mode`, `hue`, `saturation`, `color_temp`, `brightness`
    * @returns {Promise}          Resolves to output of command
    * @example
-   * ```js
 // turn a light on
 const light = new TPLSmartDevice('10.0.0.200')
 light.power(true)
@@ -193,7 +182,6 @@ light.power(true)
     console.log(status)
   })
   .catch(err => console.error(err))
-```
    */
   power (powerState = true, transition = 0, options = {}) {
     return this.info()
@@ -228,7 +216,6 @@ light.power(true)
      * @param {Boolean} ledState On or off
      * @returns {Promise}          Resolves to output of command
      * @example
-     * ```js
 // turn the LED status light on
 const light = new TPLSmartDevice('10.0.0.200')
 light.led(true)
@@ -236,7 +223,6 @@ light.led(true)
   console.log(status)
 })
 .catch(err => console.error(err))
-```
    */
   led (ledState = true) {
     return this.send({ system: { set_led_off: { off: ledState ? 0 : 1 } } })
@@ -248,7 +234,6 @@ light.led(true)
    * @param {String} newAlias
    * @returns {Promise}          Resolves to output of command
    * @example
-   * ```js
 // change the name of a light
 const light = new TPLSmartDevice('10.0.0.200')
 light.name("New Name")
@@ -256,7 +241,6 @@ light.name("New Name")
 console.log(status)
 })
 .catch(err => console.error(err))
-```
   */
 
   name (newAlias) {
@@ -275,7 +259,6 @@ console.log(status)
    * @param  {Number} year  Full year to check: ie 2017
    * @return {Promise}      Resolves to schedule info
    * @example
-```js
 // get the light's schedule for 1/2017
 const light = new TPLSmartDevice('10.0.0.200')
 light.schedule(1, 2017)
@@ -283,7 +266,6 @@ light.schedule(1, 2017)
     console.log(schedule)
   })
   .catch(e => console.error(e))
-```
    */
   daystat (month, year) {
     const now = new Date()
@@ -298,7 +280,6 @@ light.schedule(1, 2017)
    * @module cloud
    * @return {Promise} Resolves to cloud info
    * @example
-```js
 // get the cloud info for the light
 const light = new TPLSmartDevice('10.0.0.200')
 light.cloud()
@@ -306,7 +287,6 @@ light.cloud()
     console.log(info)
   })
   .catch(e => console.error(e))
-```
    */
   cloud () {
     return this.send({ 'smartlife.iot.common.cloud': { get_info: {} } })
@@ -318,7 +298,6 @@ light.cloud()
    * @module schedule
    * @return {Promise} Resolves to schedule info
    * @example
-```js
 // get the bulb's schedule
 const light = new TPLSmartDevice('10.0.0.200')
 light.schedule()
@@ -326,7 +305,6 @@ light.schedule()
     console.log(schedule)
   })
   .catch(e => console.error(e))
-```
    */
   schedule () {
     return this.send({ 'smartlife.iot.common.schedule': { get_rules: {} } })
@@ -338,7 +316,6 @@ light.schedule()
    * @module details
    * @return {Promise} Resolves to operational details
    * @example
-```js
 // get some extra details about the light
 const light = new TPLSmartDevice('10.0.0.200')
 light.details()
@@ -346,7 +323,6 @@ light.details()
     console.log(details)
   })
   .catch(e => console.error(e))
-```
    */
   details () {
     return this.send({ 'smartlife.iot.smartbulb.lightingservice': { get_light_details: {} } })
@@ -358,7 +334,6 @@ light.details()
    * @module reboot
    * @returns {Promise} Resolves to output of command
    * @example
-```js
 // get some extra details about the light
 const light = new TPLSmartDevice('10.0.0.200')
 light.reboot()
@@ -366,7 +341,6 @@ light.reboot()
     console.log(status)
   })
   .catch(e => console.error(e))
-```
    */
   reboot () {
     return this.send({ 'smartlife.iot.common.system': { reboot: { delay: 1 } } })
@@ -379,9 +353,7 @@ light.reboot()
    * @param  {Number} key    Encryption key (default is generally correct)
    * @return {Buffer}        Encrypted data
    * @example
-```js
 const encrypted = TPLSmartDevice.encrypt(Buffer.from('super secret text'))
-```
    */
   static encrypt (buffer, key = 0xAB) {
     for (let i = 0; i < buffer.length; i++) {
@@ -403,9 +375,7 @@ const encrypted = TPLSmartDevice.encrypt(Buffer.from('super secret text'))
    * @param  {Number} key    Encryption key (default is generally correct)
    * @return {Buffer}        Decrypted data
    *  @example
-```js
 const decrypted = TPLSmartDevice.decrypt(encrypted)
-```
    */
   static decrypt (buffer, key = 0xAB) {
     for (let i = 0; i < buffer.length; i++) {
