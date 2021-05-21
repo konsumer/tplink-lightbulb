@@ -142,8 +142,8 @@ module.exports = yargs
       .default('transition', 0)
       .describe('t', 'Transition time (in ms)')
 
-      .example('$0 temp 10.0.0.200 1', 'Set color-temp to orangish')
-      .example('$0 temp 10.0.0.200 10000', 'Set color-temp to bluish')
+      .example('$0 temp 10.0.0.200 2500', 'Set color-temp to orangish')
+      .example('$0 temp 10.0.0.200 9000', 'Set color-temp to bluish')
   }, argv => {
     const bulb = new TPLSmartDevice(argv.ip)
     bulb.power(true, argv.transition, { hue: 0, saturation: 0, color_temp: argv.color })
