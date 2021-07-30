@@ -291,8 +291,9 @@ module.exports = yargs
       if (!chosen) {
         handleError(`${argv.SSID} not found.`)
       }
-      console.log(argv)
-      const status = await bulb.connectwifi(argv.SSID, argv.SECRET, chosen.key_type)
+      // sometimes data is missing cypher_type, so I guess based on key_type
+      const status = await bulb.connectwifi(argv.SSID, argv.SECRET, chosen.key_type, chosen.key_type === 3 ? 2 : 0)
+
       if (status) {
         console.log(`OK, joined ${argv.SSID}.`)
       } else {

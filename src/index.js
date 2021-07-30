@@ -65,20 +65,51 @@ export default class TPLSmartDevice {
 
   // Scans the wifi networks in range of the device
   async listwifi () {
-    const msg = {
+    const r1 = await this.send({
       netif: {
         get_scaninfo: {
           refresh: 1
         }
       }
+    })
+
+    if (r1?.netif?.get_scaninfo?.ap_list) {
+      return r1.netif.get_scaninfo.ap_list
+    } else {
+      // on fail, try older message-format
+      const r2 = await this.send({
+        'smartlife.iot.common.softaponboarding': {
+          get_scaninfo: {
+            refresh: 1
+          }
+        }
+      })
+      if (r2 && r2['smartlife.iot.common.softaponboarding']?.get_scaninfo?.ap_list) {
+        return r2['smartlife.iot.common.softaponboarding'].get_scaninfo.ap_list
+      }
     }
-    const r = await this.send(msg)
-    return r?.netif.get_scaninfo.ap_list || r?.smartlife.iot.common.softaponboarding
   }
 
   // Connects the device to the access point in the parameters
-  async connectwifi (ssid, password, keyType, cypherType) {
-    const msg = {
+  async connectwifi (ssid, password, keyType = 1, cypherType = 0) {
+    const r1 = await this.send({
+      netif: {
+        set_stainfo: {
+          cypher_type: cypherType,
+          key_type: keyType,
+          password,
+          ssid
+        }
+      }
+    })
+
+    if (r1?.netif?.set_stainfo?.err_code === 0) {
+      return true
+    }
+
+    // on fail, try older message-format
+
+    const r2 = await this.send({
       'smartlife.iot.common.softaponboarding': {
         set_stainfo: {
           cypher_type: cypherType,
@@ -87,9 +118,12 @@ export default class TPLSmartDevice {
           ssid
         }
       }
+    })
+    if (r2['smartlife.iot.common.softaponboarding'] && r2['smartlife.iot.common.softaponboarding'].err_msg) {
+      throw new Error(r2['smartlife.iot.common.softaponboarding'].err_msg)
+    } else {
+      return true
     }
-    const r = await this.send(msg)
-    return r['smartlife.iot.common.softaponboarding'].set_stainfo
   }
 
   // Get info about the TPLSmartDevice
