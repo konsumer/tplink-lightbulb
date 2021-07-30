@@ -1,0 +1,55 @@
+on: 
+  push:
+    tags:
+    - '*'
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      
+      - name: Test & Build
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      
+      - run: npm test
+      - run: npm run build
+      - run: npm run release
+      
+      - name: Publish on NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Release Windows
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: 'tplight-windows.zip'
+          directory: dist
+          path: tplight-win.exe
+      
+      - name: Release Mac (intel 64)
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: 'tplight-macos-i64.zip'
+          directory: dist
+          path: tplight-macos
+      
+      - name: Release Linux (intel 64)
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: 'tplight-linux-i64.zip'
+          directory: dist
+          path: tplight-linux
+
+      - name: Publish Releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist/*.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}

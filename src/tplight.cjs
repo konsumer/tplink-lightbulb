@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const TPLSmartDevice = require('./lib')
+const TPLSmartDevice = require('../dist/tplink-lightbulb.cjs')
 const yargs = require('yargs')
 const { hexToHsl } = require('colorsys')
 const jc = require('json-colorizer')

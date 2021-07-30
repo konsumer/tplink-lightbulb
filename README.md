@@ -133,4 +133,4 @@ or for ES6:
 import TPLSmartDevice from 'tplink-lightbulb'
 ```
 
-Read more about the API [here](https://github.com/konsumer/tplink-lightbulb/blob/master/API.md).
+Read more about [the API](https://github.com/konsumer/tplink-lightbulb/blob/master/API.md).
