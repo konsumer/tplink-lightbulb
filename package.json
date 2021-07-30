@@ -6,6 +6,7 @@
   "scripts": {
     "build": "npx microbundle --target node",
     "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest",
+    "test:integration": "node ./src/*.integration.js",
     "release": "npx pkg --public --out-path=./dist ./src/tplight.cjs"
   },
   "bin": {
@@ -34,9 +35,6 @@
     "KP100"
   ],
   "dependencies": {
-    "colorsys": "latest",
-    "highlight.js": "latest",
-    "json-colorizer": "latest",
     "yargs": "latest"
   },
   "source": "./src/index.js",

@@ -1,6 +1,6 @@
 /* global describe, it, expect */
 
-import TPLSmartDevice from './index'
+import TPLSmartDevice from './index.js'
 
 describe('TPLSmartDevice', () => {
   it('should have unit-tests', () => {

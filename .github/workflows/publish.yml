@@ -18,6 +18,9 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npm run release
+      - run: mkdir -p dist/linux && mv dist/tplight-linux dist/linux/tplight
+      - run: mkdir -p dist/macos && mv dist/tplight-macos dist/macos/tplight
+      - run: mkdir -p dist/windows && mv dist/tplight-win.exe dist/windows/tplight.exe
       
       - name: Publish on NPM
         uses: JS-DevTools/npm-publish@v1
@@ -29,27 +32,27 @@ jobs:
         with:
           type: 'zip'
           filename: 'tplight-windows.zip'
-          directory: dist
-          path: tplight-win.exe
+          directory: dist/windows
+          path: tplight.exe
       
       - name: Release Mac (intel 64)
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
           filename: 'tplight-macos-i64.zip'
-          directory: dist
-          path: tplight-macos
+          directory: dist/macos
+          path: tplight
       
       - name: Release Linux (intel 64)
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
           filename: 'tplight-linux-i64.zip'
-          directory: dist
-          path: tplight-linux
+          directory: dist/linux
+          path: tplight
 
       - name: Publish Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "dist/*.zip"
+          artifacts: "dist/**/*.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
