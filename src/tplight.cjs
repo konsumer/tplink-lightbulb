@@ -2,6 +2,7 @@
 
 const TPLSmartDevice = require('../dist/tplink-lightbulb.cjs')
 const yargs = require('yargs')
+const util = require('util')
 
 // https://gist.github.com/xenozauros/f6e185c8de2a04cdfecf
 function hexToHsl (hex) {
@@ -26,7 +27,17 @@ function hexToHsl (hex) {
   return { h, s, l }
 }
 
-const json = process.stdout.isTTY ? s => console.log(s) : s => console.log(JSON.stringify(s, null, 2))
+async function readStream (stream = process.stdin) {
+  const chunks = []
+  return new Promise((resolve, reject) => {
+    stream.on('data', chunk => chunks.push(chunk))
+    stream.on('end', () => {
+      resolve(Buffer.concat(chunks).toString('utf8'))
+    })
+  })
+}
+
+const json = process.stdout.isTTY ? s => console.log(util.inspect(s, false, null, true)) : s => console.log(JSON.stringify(s, null, 2))
 
 // for pkg support
 if (typeof process.pkg !== 'undefined') {
@@ -221,9 +232,15 @@ module.exports = yargs
       .catch(handleError)
   })
 
-  .command('raw <ip> <json>', 'Send a raw JSON command', {}, argv => {
+  .command('raw <ip> [json]', 'Send a raw JSON command, use param or stdin', {}, async argv => {
     const bulb = new TPLSmartDevice(argv.ip)
-    bulb.send(JSON.parse(argv.json))
+    process.stdin.resume()
+    const msg = argv.json ? argv.json : await readStream()
+    if (!msg) {
+      console.error('For raw, you must provide JSON via param or stdin.')
+      process.exit(1)
+    }
+    bulb.send(JSON.parse(msg))
       .then(r => argv.quiet || json(r))
       .catch(handleError)
   })
