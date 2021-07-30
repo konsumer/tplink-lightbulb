@@ -2,7 +2,6 @@
 
 const TPLSmartDevice = require('../dist/tplink-lightbulb.cjs')
 const yargs = require('yargs')
-const util = require('util')
 
 // https://gist.github.com/xenozauros/f6e185c8de2a04cdfecf
 function hexToHsl (hex) {
@@ -37,7 +36,8 @@ async function readStream (stream = process.stdin) {
   })
 }
 
-const json = process.stdout.isTTY ? s => console.log(util.inspect(s, false, null, true)) : s => console.log(JSON.stringify(s, null, 2))
+// wrapper that will output JSON or colored depending on how it's being piped
+const json = process.stdout.isTTY ? s => console.dir(s, { depth: null, colors: true, maxArrayLength: null, maxStringLength: null }) : s => console.log(JSON.stringify(s, null, 2))
 
 // for pkg support
 if (typeof process.pkg !== 'undefined') {
