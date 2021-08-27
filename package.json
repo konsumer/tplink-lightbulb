@@ -10,7 +10,7 @@
     "release": "npx pkg --public --out-path=./dist ./src/tplight.cjs"
   },
   "bin": {
-    "tplight": "./src/tplight.cjs"
+    "tplight": "src/tplight.cjs"
   },
   "repository": {
     "type": "git",
@@ -37,21 +37,21 @@
   "dependencies": {
     "yargs": "latest"
   },
-  "source": "./src/index.js",
-  "exports": "./dist/tplink-lightbulb.modern.js",
-  "main": "./dist/tplink-lightbulb.cjs",
-  "module": "./dist/tplink-lightbulb.module.js",
-  "unpkg": "./dist/tplink-lightbulb.umd.js",
+  "source": "src/index.js",
+  "exports": "dist/tplink-lightbulb.modern.js",
+  "main": "dist/tplink-lightbulb.cjs",
+  "module": "dist/tplink-lightbulb.module.js",
+  "unpkg": "dist/tplink-lightbulb.umd.js",
   "files": [
-    "./src/tplight.cjs",
-    "./src/index.js",
-    "./dist/tplink-lightbulb.cjs",
-    "./dist/tplink-lightbulb.cjs.map",
-    "./dist/tplink-lightbulb.modern.js",
-    "./dist/tplink-lightbulb.modern.js.map",
-    "./dist/tplink-lightbulb.module.js",
-    "./dist/tplink-lightbulb.module.js.map",
-    "./dist/tplink-lightbulb.umd.js",
-    "./dist/tplink-lightbulb.umd.js.map"
+    "src/tplight.cjs",
+    "src/index.js",
+    "dist/tplink-lightbulb.cjs",
+    "dist/tplink-lightbulb.cjs.map",
+    "dist/tplink-lightbulb.modern.js",
+    "dist/tplink-lightbulb.modern.js.map",
+    "dist/tplink-lightbulb.module.js",
+    "dist/tplink-lightbulb.module.js.map",
+    "dist/tplink-lightbulb.umd.js",
+    "dist/tplink-lightbulb.umd.js.map"
   ]
 }
