@@ -7,7 +7,8 @@
     "build": "npx microbundle --target node",
     "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest",
     "test:integration": "node ./src/*.integration.js",
-    "release": "npx pkg --public --out-path=./dist ./src/tplight.cjs"
+    "release": "npx pkg --public --out-path=./dist ./src/tplight.cjs",
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "tplight": "src/tplight.cjs"
@@ -37,21 +38,21 @@
   "dependencies": {
     "yargs": "latest"
   },
-  "source": "src/index.js",
-  "exports": "dist/tplink-lightbulb.modern.js",
-  "main": "dist/tplink-lightbulb.cjs",
-  "module": "dist/tplink-lightbulb.module.js",
-  "unpkg": "dist/tplink-lightbulb.umd.js",
+  "source": "./src/index.js",
+  "exports": "./dist/tplink-lightbulb.modern.js",
+  "main": "./dist/tplink-lightbulb.cjs",
+  "module": "./dist/tplink-lightbulb.module.js",
+  "unpkg": "./dist/tplink-lightbulb.umd.js",
   "files": [
-    "src/tplight.cjs",
-    "src/index.js",
-    "dist/tplink-lightbulb.cjs",
-    "dist/tplink-lightbulb.cjs.map",
-    "dist/tplink-lightbulb.modern.js",
-    "dist/tplink-lightbulb.modern.js.map",
-    "dist/tplink-lightbulb.module.js",
-    "dist/tplink-lightbulb.module.js.map",
-    "dist/tplink-lightbulb.umd.js",
-    "dist/tplink-lightbulb.umd.js.map"
+    "./src/tplight.cjs",
+    "./src/index.js",
+    "./dist/tplink-lightbulb.cjs",
+    "./dist/tplink-lightbulb.cjs.map",
+    "./dist/tplink-lightbulb.modern.js",
+    "./dist/tplink-lightbulb.modern.js.map",
+    "./dist/tplink-lightbulb.module.js",
+    "./dist/tplink-lightbulb.module.js.map",
+    "./dist/tplink-lightbulb.umd.js",
+    "./dist/tplink-lightbulb.umd.js.map"
   ]
 }
