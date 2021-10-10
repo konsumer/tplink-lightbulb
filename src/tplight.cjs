@@ -199,7 +199,7 @@ module.exports = yargs
   }, argv => {
     const color = hexToHsl(argv.color)
     const bulb = new TPLSmartDevice(argv.ip)
-    bulb.power(true, argv.transition, { hue: color.h, saturation: color.s, brightness: color.l, color_temp: 0 })
+    bulb.power(true, argv.transition, { hue: color.h * 100, saturation: color.s * 100, brightness: color.l * 100, color_temp: 0 })
       .then(r => argv.quiet || json(r))
       .catch(handleError)
   })
