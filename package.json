@@ -39,8 +39,10 @@
     "yargs": "latest"
   },
   "source": "./src/index.js",
-  "exports": "./dist/tplink-lightbulb.modern.js",
-  "main": "./dist/tplink-lightbulb.cjs",
+  "exports": {
+    "import": "./dist/tplink-lightbulb.modern.js",
+    "require": "./dist/tplink-lightbulb.cjs"
+  },
   "module": "./dist/tplink-lightbulb.module.js",
   "unpkg": "./dist/tplink-lightbulb.umd.js",
   "files": [
