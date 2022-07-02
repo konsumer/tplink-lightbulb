@@ -4,10 +4,10 @@
   "type": "module",
   "description": "Control TP-Link smart-home devices from nodejs",
   "scripts": {
-    "build": "npx microbundle --target node",
-    "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest",
+    "build": "microbundle --target node",
+    "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest",
     "test:integration": "node ./src/*.integration.js",
-    "release": "npx pkg --public --out-path=./dist ./src/tplight.cjs",
+    "release": "pkg --public --out-path=./dist ./src/tplight.cjs",
     "prepublishOnly": "npm run build"
   },
   "bin": {
@@ -39,7 +39,10 @@
     "yargs": "latest"
   },
   "source": "./src/index.js",
-  "exports": "./dist/tplink-lightbulb.modern.js",
+  "exports": {
+    "require": "./dist/tplink-lightbulb.cjs",
+    "default": "./dist/tplink-lightbulb.modern.js"
+  },
   "main": "./dist/tplink-lightbulb.cjs",
   "module": "./dist/tplink-lightbulb.module.js",
   "unpkg": "./dist/tplink-lightbulb.umd.js",
@@ -54,5 +57,10 @@
     "dist/tplink-lightbulb.module.js.map",
     "dist/tplink-lightbulb.umd.js",
     "dist/tplink-lightbulb.umd.js.map"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^28.1.2",
+    "microbundle": "^0.15.0",
+    "pkg": "^5.7.0"
+  }
 }
