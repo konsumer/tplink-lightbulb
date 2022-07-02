@@ -1,6 +1,6 @@
 {
   "name": "tplink-lightbulb",
-  "version": "1.7.8",
+  "version": "1.7.9",
   "type": "module",
   "description": "Control TP-Link smart-home devices from nodejs",
   "scripts": {
