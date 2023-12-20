@@ -164,7 +164,7 @@ export default class TPLSmartDevice {
   }
 
   // Set the name of lightbulb
-  async name (newAlias) {
+  async setName (newAlias) {
     const info = await this.info()
     return typeof info.dev_name !== 'undefined'
       ? this.send({ system: { set_dev_alias: { alias: newAlias } } })

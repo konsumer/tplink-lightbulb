@@ -3,7 +3,7 @@
 import TPLSmartDevice from './index.js'
 
 // get a number of real devices to test
-async function getNLights (n = 3, timeout=3000) {
+async function getNLights (n = 1, timeout=3000) {
   return new Promise((resolve, reject) => {
     const scan = TPLSmartDevice.scan()
     const testLights = []

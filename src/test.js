@@ -7,7 +7,7 @@ describe('TPLSmartDevice', () => {
     expect(1 + 1).toBe(2)
   })
 
-  it('should be able to encryt', () => {
+  it('should be able to encrypt', () => {
     expect(TPLSmartDevice.encrypt(Buffer.from('hello world')).toString('hex')).toBe('c3a6caa6c9e99ef183ef8b')
   })
 
