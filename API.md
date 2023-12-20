@@ -1,4 +1,4 @@
-# [tplink-lightbulb](https://github.com/konsumer/tplink-lightbulb#readme) *1.6.3*
+# [tplink-lightbulb](https://github.com/konsumer/tplink-lightbulb#readme) *1.8.0*
 
 > Control TP-Link smart-home devices from nodejs
 
