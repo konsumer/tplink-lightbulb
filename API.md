@@ -254,7 +254,7 @@ light.led(true)
 
 
 
-#### name(newAlias) 
+#### setName(newAlias) 
 
 Set the name of lightbulb
 
@@ -275,7 +275,7 @@ Set the name of lightbulb
 ```javascript
 // change the name of a light
 const light = new TPLSmartDevice('10.0.0.200')
-light.name("New Name")
+light.setName("New Name")
 .then(status => {
 console.log(status)
 })
